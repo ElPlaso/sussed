@@ -20,9 +20,10 @@ model Project {
   updatedAt   DateTime @updatedAt
   link        String?
 
-  user          User           @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  susResponses  SusResponse[]
-  collaborators Collaborator[]
+  user           User            @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  susResponses   SusResponse[]
+  susInvitations SusInvitation[]
+  collaborators  Collaborator[]
 }
 
 model SusResponse {
@@ -39,9 +40,20 @@ model SusResponse {
   questionEight Int
   questionNine  Int
   questionTen   Int
+  invitationId  String?
 
-  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  respondee User?   @relation(fields: [respondeeId], references: [id])
+  project    Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  respondee  User?          @relation(fields: [respondeeId], references: [id])
+  invitation SusInvitation? @relation(fields: [invitationId], references: [id])
+}
+
+model SusInvitation {
+  id        String   @id
+  projectId String
+  createdAt DateTime @default(now())
+
+  project     Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  susResponse SusResponse[]
 }
 
 model Collaborator {
