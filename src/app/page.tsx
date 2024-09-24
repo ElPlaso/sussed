@@ -19,7 +19,7 @@ export default async function Home() {
   const projects = await getProjects();
 
   return (
-    <main className="flex flex-col items-center justify-between px-12 py-8 gap-y-4">
+    <main className="flex flex-col px-12 py-8 gap-y-4">
       <ProjectsHeader />
       <Projects projects={projects} />
     </main>
