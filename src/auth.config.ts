@@ -5,7 +5,8 @@ export default {
     providers: [
         GitHubProvider({
             clientId: process.env.GITHUB_ID || '',
-            clientSecret: process.env.GITHUB_SECRET || ''
+            clientSecret: process.env.GITHUB_SECRET || '',
+            allowDangerousEmailAccountLinking: true // Resolves "To confirm your identity, sign in with the same account you used originally" error when signing in with GitHub
         })
     ],
     callbacks: {
