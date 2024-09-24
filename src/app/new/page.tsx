@@ -1,6 +1,6 @@
 "use client";
 
-import { createProject } from "@/actions";
+import { createProject } from "@/actions/create-project";
 import SubmitButton from "@/components/shared/SubmitButton";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

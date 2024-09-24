@@ -9,20 +9,42 @@ import {
   Input,
 } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { uniqueId } from "lodash";
+import { createSusInvitation } from "@/actions/create-sus-invitation";
 
-// TODO: implement action for creating invite code
 export default function ProjectInviter() {
   const [uniqueCode, setUniqueCode] = useState<string>("");
+  const [isCopied, setIsCopied] = useState<boolean>(false);
 
   const url = process.env.NEXT_PUBLIC_URL; // TODO: Validate env variable
   const pathName = usePathname();
+  const projectId = useMemo(() => pathName.split("/")[2], [pathName]);
 
   const handleGenerateUniqueLink = () => {
     const newId = uniqueId();
     setUniqueCode(newId);
+    setIsCopied(false);
   };
+
+  const uniqueLink = useMemo(
+    () => `${url}${pathName}/sus/invite/${uniqueCode}`,
+    [url, pathName, uniqueCode]
+  );
+
+  const handleCreateInvitation = useCallback(async () => {
+    if (!uniqueCode) return;
+    if (!isCopied) {
+      const result = await createSusInvitation(projectId, uniqueCode);
+      if (!result?.errors) {
+        navigator.clipboard.writeText(uniqueLink);
+        setIsCopied(true);
+      }
+    } else {
+      navigator.clipboard.writeText(uniqueLink);
+    }
+    // TODO: Loading spinner + toast would be nice
+  }, [isCopied, projectId, uniqueCode, uniqueLink]);
 
   return (
     <Card
@@ -40,12 +62,10 @@ export default function ProjectInviter() {
       </CardHeader>
       <CardBody>
         <div className="flex gap-x-2 items-center">
-          <Input
-            className="flex-1"
-            isReadOnly
-            value={`${url}${pathName}/sus/invite/${uniqueCode}`}
-          />
-          <Button isDisabled={!uniqueCode}>Copy</Button>
+          <Input className="flex-1" isReadOnly value={uniqueLink} />
+          <Button isDisabled={!uniqueCode} onClick={handleCreateInvitation}>
+            Copy
+          </Button>
         </div>
       </CardBody>
       <CardFooter>

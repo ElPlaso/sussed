@@ -18,6 +18,7 @@ async function getProject(id: string) {
   return projects;
 }
 
+// TODO: Handle permissions
 export default async function ProjectPage({
   params: { id },
 }: {

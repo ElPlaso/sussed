@@ -1,7 +1,7 @@
 "use server";
 
-import { auth } from "./auth";
-import prisma from "./db";
+import { auth } from "../auth";
+import prisma from "../db";
 import { z } from "zod";
 
 
