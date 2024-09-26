@@ -10,8 +10,8 @@ import {
 } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
 import { useCallback, useMemo, useState } from "react";
-import { uniqueId } from "lodash";
 import { createSusInvitation } from "@/actions/create-sus-invitation";
+import { createId } from "@paralleldrive/cuid2";
 
 export default function ProjectInviter() {
   const [uniqueCode, setUniqueCode] = useState<string>("");
@@ -22,7 +22,7 @@ export default function ProjectInviter() {
   const projectId = useMemo(() => pathName.split("/")[2], [pathName]);
 
   const handleGenerateUniqueLink = () => {
-    const newId = uniqueId();
+    const newId = createId();
     setUniqueCode(newId);
     setIsCopied(false);
   };
