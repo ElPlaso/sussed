@@ -7,26 +7,33 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  getKeyValue,
 } from "@nextui-org/react";
-import { SusResponse } from "@prisma/client";
+import { SusRating, SusResponse } from "@prisma/client";
 
 const columns = [
   {
-    key: "respondee",
+    key: "respondeeId",
     label: "NAME",
   },
-  { key: "question-1", label: "Q1" },
-  { key: "question-2", label: "Q2" },
-  { key: "question-3", label: "Q3" },
-  { key: "question-4", label: "Q4" },
-  { key: "question-5", label: "Q5" },
-  { key: "question-6", label: "Q6" },
-  { key: "question-7", label: "Q7" },
-  { key: "question-8", label: "Q8" },
-  { key: "question-9", label: "Q9" },
-  { key: "question-10", label: "Q10" },
+  { key: "questionOne", label: "Q1" },
+  { key: "questionTwo", label: "Q2" },
+  { key: "questionThree", label: "Q3" },
+  { key: "questionFour", label: "Q4" },
+  { key: "questionFive", label: "Q5" },
+  { key: "questionSix", label: "Q6" },
+  { key: "questionSeven", label: "Q7" },
+  { key: "questionEight", label: "Q8" },
+  { key: "questionNine", label: "Q9" },
+  { key: "questionTen", label: "Q10" },
 ];
+
+const ratingNumberDisplays: Record<SusRating, number> = {
+  ONE: 1,
+  TWO: 2,
+  THREE: 3,
+  FOUR: 4,
+  FIVE: 5,
+};
 
 export interface ProjectSusResponsesProps {
   responses: Array<SusResponse>;
@@ -47,9 +54,18 @@ export default function ProjectSusResponses(props: ProjectSusResponsesProps) {
         <TableBody emptyContent={"No responses yet."} items={responses}>
           {(item) => (
             <TableRow key={item.id}>
-              {(columnKey) => (
-                <TableCell>{getKeyValue(item, columnKey)}</TableCell>
-              )}
+              <TableCell>{""}</TableCell>
+              {/* TODO: Display potential user name here*/}
+              <TableCell>{ratingNumberDisplays[item.questionOne]}</TableCell>
+              <TableCell>{ratingNumberDisplays[item.questionTwo]}</TableCell>
+              <TableCell>{ratingNumberDisplays[item.questionThree]}</TableCell>
+              <TableCell>{ratingNumberDisplays[item.questionFour]}</TableCell>
+              <TableCell>{ratingNumberDisplays[item.questionFive]}</TableCell>
+              <TableCell>{ratingNumberDisplays[item.questionSix]}</TableCell>
+              <TableCell>{ratingNumberDisplays[item.questionSeven]}</TableCell>
+              <TableCell>{ratingNumberDisplays[item.questionEight]}</TableCell>
+              <TableCell>{ratingNumberDisplays[item.questionNine]}</TableCell>
+              <TableCell>{ratingNumberDisplays[item.questionTen]}</TableCell>
             </TableRow>
           )}
         </TableBody>
