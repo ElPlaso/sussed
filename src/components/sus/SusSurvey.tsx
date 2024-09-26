@@ -4,6 +4,7 @@ import { RadioGroup, Radio, CardBody, Card } from "@nextui-org/react";
 import SubmitButton from "../shared/SubmitButton";
 import { useMemo } from "react";
 import { useFormState } from "react-dom";
+import { SusRating } from "@prisma/client";
 
 const susQuestions = [
   "I think that I would like to use this system frequently.",
@@ -17,6 +18,14 @@ const susQuestions = [
   "I felt very confident using the system.",
   "I needed to learn a lot of things before I could get going with this system.",
 ];
+
+const radioValues: Record<number, SusRating> = {
+  1: SusRating.ONE,
+  2: SusRating.TWO,
+  3: SusRating.THREE,
+  4: SusRating.FOUR,
+  5: SusRating.FIVE,
+};
 
 interface FormState {
   errors?: Array<string>;
@@ -69,26 +78,21 @@ export default function SusSurvey(props: SusSurveyProps) {
           <Card key={i} className="max-w-[48rem]">
             <CardBody>
               <RadioGroup
+                key={i}
                 isRequired
-                name={(i + 1).toString()}
+                name={`${i + 1}`}
                 label={`${i + 1}: ${question}`}
                 orientation="horizontal"
               >
-                <Radio className="mr-4" value="1">
-                  1
-                </Radio>
-                <Radio className="mx-4" value="2">
-                  2
-                </Radio>
-                <Radio className="mx-4" value="3">
-                  3
-                </Radio>
-                <Radio className="mx-4" value="4">
-                  4
-                </Radio>
-                <Radio className="ml-4" value="5">
-                  5
-                </Radio>
+                {Object.entries(radioValues).map(([key, value]) => (
+                  <Radio
+                    className="first:-ml-2 mx-4 last:-mr-2"
+                    key={key}
+                    value={value}
+                  >
+                    {key}
+                  </Radio>
+                ))}
               </RadioGroup>
             </CardBody>
           </Card>

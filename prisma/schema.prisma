@@ -27,24 +27,32 @@ model Project {
 }
 
 model SusResponse {
-  id            String  @id @default(cuid())
+  id            String    @id @default(cuid())
   projectId     String
   respondeeId   String?
-  questionOne   Int
-  questionTwo   Int
-  questionThree Int
-  questionFour  Int
-  questionFive  Int
-  questionSix   Int
-  questionSeven Int
-  questionEight Int
-  questionNine  Int
-  questionTen   Int
+  questionOne   SusRating
+  questionTwo   SusRating
+  questionThree SusRating
+  questionFour  SusRating
+  questionFive  SusRating
+  questionSix   SusRating
+  questionSeven SusRating
+  questionEight SusRating
+  questionNine  SusRating
+  questionTen   SusRating
   invitationId  String?
 
   project    Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
   respondee  User?          @relation(fields: [respondeeId], references: [id])
   invitation SusInvitation? @relation(fields: [invitationId], references: [id])
+}
+
+enum SusRating {
+  ONE
+  TWO
+  THREE
+  FOUR
+  FIVE
 }
 
 model SusInvitation {

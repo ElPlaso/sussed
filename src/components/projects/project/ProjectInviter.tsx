@@ -28,7 +28,7 @@ export default function ProjectInviter() {
   };
 
   const uniqueLink = useMemo(
-    () => `${url}${pathName}/sus/invite/${uniqueCode}`,
+    () => `${url}${pathName}/sus?invite-code=${uniqueCode}`,
     [url, pathName, uniqueCode]
   );
 
