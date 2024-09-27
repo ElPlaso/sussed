@@ -1,4 +1,4 @@
-import SusWrapper from "@/components/projects/project/SusWrapper";
+import SusSuccess from "@/components/projects/project/SusSuccess";
 import prisma from "@/db";
 import { notFound } from "next/navigation";
 
@@ -16,7 +16,7 @@ async function getProject(id: string) {
   return project;
 }
 
-export default async function SusQuestionnaire({
+export default async function SusSuccessPage({
   params: { id },
 }: {
   params: { id: string };
@@ -29,10 +29,7 @@ export default async function SusQuestionnaire({
 
   return (
     <main className="flex flex-col px-12 items-center py-8">
-      <div className="flex flex-col gap-y-4 items-start min-w-96">
-        <h1 className="text-2xl">{project.title}</h1>
-        <SusWrapper project={project} />
-      </div>
+      <SusSuccess project={project} />
     </main>
   );
 }

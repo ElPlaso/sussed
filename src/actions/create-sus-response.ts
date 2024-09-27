@@ -34,7 +34,7 @@ const parseSusResponse = (formData: FormData) => {
 };
 
 
-export async function createSusResponse(projectId: string, formData: FormData) {
+export async function createSusResponse(projectId: string, formData: FormData, invitationCode: string) {
     const project = await prisma.project.findUnique({
         where: {
             id: projectId,
@@ -43,6 +43,19 @@ export async function createSusResponse(projectId: string, formData: FormData) {
 
     if (!project) {
         throw new Error("Project not found.");
+    }
+
+    const response = await prisma.susResponse.findFirst({
+        where: {
+            projectId,
+            invitationId: invitationCode,
+        }
+    })
+
+    if (response !== null) {
+        return {
+            errors: ["A response with this invitation code has already been submitted for this project."],
+        };
     }
 
     const validatedFields = parseSusResponse(formData);
@@ -58,6 +71,7 @@ export async function createSusResponse(projectId: string, formData: FormData) {
             data: {
                 ...validatedFields.data,
                 projectId,
+                invitationId: invitationCode,
             },
         });
     } catch (error) {
