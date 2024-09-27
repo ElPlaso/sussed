@@ -1,10 +1,16 @@
+"use client";
+
 import { Navbar as NextNavbar, NavbarContent } from "@nextui-org/react";
 import React from "react";
 import SidebarButton from "./SidebarButton";
 import NotificationsDropdown from "./NotificationsDropdown";
 import UserDropdown from "./UserDropdown";
+import { useSession } from "next-auth/react";
+import SignInDropdown from "./SignInDropdown";
 
 export default function Navbar() {
+  const user = useSession().data?.user;
+
   return (
     <NextNavbar
       isBordered
@@ -17,8 +23,14 @@ export default function Navbar() {
         <SidebarButton />
       </NavbarContent>
       <NavbarContent justify="end" className="w-full">
-        <NotificationsDropdown />
-        <UserDropdown />
+        {user ? (
+          <>
+            <NotificationsDropdown />
+            <UserDropdown />
+          </>
+        ) : (
+          <SignInDropdown />
+        )}
       </NavbarContent>
     </NextNavbar>
   );

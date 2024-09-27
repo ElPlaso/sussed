@@ -27,7 +27,7 @@ export default function UserDropdown() {
         <DropdownTrigger>
           <Avatar
             as="button"
-            color="secondary"
+            color="default"
             size="md"
             src={user.image || ""}
             name={user.name || ""}

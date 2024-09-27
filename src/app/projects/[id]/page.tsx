@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import ProjectInviter from "@/components/projects/project/ProjectInviter";
 import ProjectMenu from "@/components/projects/project/ProjectMenu";
 import ProjectSideBar from "@/components/projects/project/ProjectSideBar";
@@ -18,13 +19,25 @@ async function getProject(id: string) {
   return projects;
 }
 
-// TODO: Handle permissions
 export default async function ProjectPage({
   params: { id },
 }: {
   params: { id: string };
 }) {
   const project = await getProject(id);
+  const userId = (await auth())?.user?.id;
+
+  const isOwner = project?.ownerId === userId;
+
+  if (!project?.isPublic && !isOwner) {
+    return (
+      <main className="flex w-full">
+        <div className="flex flex-1 flex-col px-12 py-8 gap-y-8">
+          <h1 className="text-xl">You do not have access to this project.</h1>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="flex w-full">
@@ -39,7 +52,7 @@ export default async function ProjectPage({
           </div>
           <ProjectMenu />
         </div>
-        <ProjectInviter />
+        {isOwner && <ProjectInviter />}
         <ProjectSusResponses responses={project?.susResponses || []} />
       </div>
       <ProjectSideBar />
