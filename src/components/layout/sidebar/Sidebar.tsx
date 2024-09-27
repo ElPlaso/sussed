@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { tv } from "@nextui-org/react";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 const sidebarStyles = tv({
   base: "bg-background transition-transform h-full fixed -translate-x-full w-64 shrink-0 z-[202] overflow-y-auto border-r border-divider flex-col py-6 px-3 md:ml-0 md:flex md:static md:h-screen md:translate-x-0",
@@ -32,7 +33,14 @@ export default function Sidebar() {
         />
       ) : null}
       <div className={sidebarStyles({ collapsed })}>
-        <div className="flex gap-8 items-center px-6">
+        <div className="flex gap-x-2 items-center px-6">
+          <Image
+            src="/favicon.ico"
+            alt="Sussed Logo"
+            className="dark:invert"
+            width={40}
+            height={40}
+          />
           <h1 className="text-2xl font-semibold">Sussed.</h1>
         </div>
         <div className="flex flex-col gap-6 mt-9 px-2">
