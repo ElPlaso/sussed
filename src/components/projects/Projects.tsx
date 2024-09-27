@@ -23,7 +23,7 @@ export default function Projects(props: ProjectsProps) {
   };
 
   return (
-    <div className="grid grid-cols-4 gap-4 w-full">
+    <div className="grid xl:grid-cols-4 lg:grid-cols-3 gap-4 w-full md:grid-cols-2 max-sm:grid-cols-1">
       {projects.map((project) => (
         <Card
           isPressable
