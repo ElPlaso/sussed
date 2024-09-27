@@ -7,6 +7,7 @@ import {
   CardFooter,
   CardHeader,
   Input,
+  Snippet,
 } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
 import { useCallback, useMemo, useState } from "react";
@@ -61,12 +62,9 @@ export default function ProjectInviter() {
         </div>
       </CardHeader>
       <CardBody>
-        <div className="flex gap-x-2 items-center">
-          <Input className="flex-1" isReadOnly value={uniqueLink} />
-          <Button isDisabled={!uniqueCode} onClick={handleCreateInvitation}>
-            Copy
-          </Button>
-        </div>
+        <Snippet symbol="" variant="bordered">
+          {uniqueLink}
+        </Snippet>
       </CardBody>
       <CardFooter>
         <p className="text-xs text-danger">
