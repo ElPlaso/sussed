@@ -1,13 +1,9 @@
 "use client";
 
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CircularProgress,
-} from "@nextui-org/react";
+import { Card, CardBody, CardFooter } from "@nextui-org/react";
 import { Project } from "@prisma/client";
 import { useRouter } from "next/navigation";
+import ProjectSusScore from "./ProjectSusScore";
 
 export interface ProjectsProps {
   projects: Array<Project>;
@@ -36,13 +32,7 @@ export default function Projects(props: ProjectsProps) {
           <CardBody className="p-4">{project.title}</CardBody>
           <CardFooter className="text-small justify-between">
             <span>{project.description}</span>
-            <CircularProgress
-              size="lg"
-              value={0} // TODO: Add score here
-              color="success"
-              formatOptions={{ style: "percent" }}
-              showValueLabel={true}
-            />
+            <ProjectSusScore projectId={project.id} />
           </CardFooter>
         </Card>
       ))}

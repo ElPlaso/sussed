@@ -1,5 +1,6 @@
 "use client";
 
+import { susRatingNumbers } from "@/utils";
 import {
   Table,
   TableHeader,
@@ -8,7 +9,7 @@ import {
   TableRow,
   TableCell,
 } from "@nextui-org/react";
-import { SusRating, SusResponse } from "@prisma/client";
+import { SusResponse } from "@prisma/client";
 
 const columns = [
   {
@@ -26,14 +27,6 @@ const columns = [
   { key: "questionNine", label: "Q9" },
   { key: "questionTen", label: "Q10" },
 ];
-
-const ratingNumberDisplays: Record<SusRating, number> = {
-  ONE: 1,
-  TWO: 2,
-  THREE: 3,
-  FOUR: 4,
-  FIVE: 5,
-};
 
 export interface ProjectSusResponsesProps {
   responses: Array<SusResponse>;
@@ -56,16 +49,16 @@ export default function ProjectSusResponses(props: ProjectSusResponsesProps) {
             <TableRow key={item.id}>
               <TableCell>{""}</TableCell>
               {/* TODO: Display potential user name here*/}
-              <TableCell>{ratingNumberDisplays[item.questionOne]}</TableCell>
-              <TableCell>{ratingNumberDisplays[item.questionTwo]}</TableCell>
-              <TableCell>{ratingNumberDisplays[item.questionThree]}</TableCell>
-              <TableCell>{ratingNumberDisplays[item.questionFour]}</TableCell>
-              <TableCell>{ratingNumberDisplays[item.questionFive]}</TableCell>
-              <TableCell>{ratingNumberDisplays[item.questionSix]}</TableCell>
-              <TableCell>{ratingNumberDisplays[item.questionSeven]}</TableCell>
-              <TableCell>{ratingNumberDisplays[item.questionEight]}</TableCell>
-              <TableCell>{ratingNumberDisplays[item.questionNine]}</TableCell>
-              <TableCell>{ratingNumberDisplays[item.questionTen]}</TableCell>
+              <TableCell>{susRatingNumbers[item.questionOne]}</TableCell>
+              <TableCell>{susRatingNumbers[item.questionTwo]}</TableCell>
+              <TableCell>{susRatingNumbers[item.questionThree]}</TableCell>
+              <TableCell>{susRatingNumbers[item.questionFour]}</TableCell>
+              <TableCell>{susRatingNumbers[item.questionFive]}</TableCell>
+              <TableCell>{susRatingNumbers[item.questionSix]}</TableCell>
+              <TableCell>{susRatingNumbers[item.questionSeven]}</TableCell>
+              <TableCell>{susRatingNumbers[item.questionEight]}</TableCell>
+              <TableCell>{susRatingNumbers[item.questionNine]}</TableCell>
+              <TableCell>{susRatingNumbers[item.questionTen]}</TableCell>
             </TableRow>
           )}
         </TableBody>
