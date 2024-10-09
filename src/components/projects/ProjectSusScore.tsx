@@ -3,13 +3,15 @@
 import useProjectSusScore from "@/hooks/useProjectSusScore";
 import { CircularProgress } from "@nextui-org/react";
 import { useMemo } from "react";
+import { GOOD_THRESHOLD, OK_THRESHOLD } from "../utils/score-results";
 
 export interface ProjectSusScoreProps {
   projectId: string;
+  size?: "lg" | "xl";
 }
 
 export default function ProjectSusScore(props: ProjectSusScoreProps) {
-  const { projectId } = props;
+  const { projectId, size = "lg" } = props;
 
   const { data: score } = useProjectSusScore(projectId);
 
@@ -17,10 +19,10 @@ export default function ProjectSusScore(props: ProjectSusScoreProps) {
     if (score === undefined) {
       return "default";
     }
-    if (score < 50) {
+    if (score < OK_THRESHOLD) {
       return "danger";
     }
-    return score < 70 ? "warning" : "success";
+    return score < GOOD_THRESHOLD ? "warning" : "success";
   }, [score]);
 
   return (

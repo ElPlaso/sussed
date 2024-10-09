@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 import ProjectInviter from "@/components/projects/project/ProjectInviter";
 import ProjectMenu from "@/components/projects/project/ProjectMenu";
-import ProjectSideBar from "@/components/projects/project/ProjectSideBar";
+import ProjectResults from "@/components/projects/project/ProjectResults";
 import ProjectSusResponses from "@/components/projects/project/ProjectSusResponses";
 import prisma from "@/db";
 import { Link } from "@nextui-org/react";
@@ -40,8 +40,8 @@ export default async function ProjectPage({
   }
 
   return (
-    <main className="flex w-full">
-      <div className="flex flex-1 flex-col px-12 py-8 gap-y-8">
+    <main className="flex w-full justify-center">
+      <div className="flex flex-col px-12 py-8 gap-y-8 max-w-[96rem] w-full">
         <div className="flex gap-x-4 justify-between items-start w-full">
           <div className="flex flex-col gap-y-2">
             <h1 className="text-xl">{project?.title}</h1>
@@ -52,10 +52,10 @@ export default async function ProjectPage({
           </div>
           <ProjectMenu />
         </div>
+        <ProjectResults />
         {isOwner && <ProjectInviter />}
         <ProjectSusResponses responses={project?.susResponses || []} />
       </div>
-      <ProjectSideBar />
     </main>
   );
 }

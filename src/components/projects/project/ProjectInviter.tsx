@@ -62,7 +62,7 @@ export default function ProjectInviter() {
         </div>
       </CardHeader>
       <CardBody>
-        <Snippet symbol="" variant="bordered">
+        <Snippet symbol="" variant="bordered" className="overflow-x-auto">
           {uniqueLink}
         </Snippet>
       </CardBody>
