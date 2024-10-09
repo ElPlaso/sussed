@@ -4,9 +4,8 @@ import {
   Button,
   Card,
   CardBody,
-  CardFooter,
+  // CardFooter,
   CardHeader,
-  Input,
   Snippet,
 } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
@@ -16,17 +15,10 @@ import { createId } from "@paralleldrive/cuid2";
 
 export default function ProjectInviter() {
   const [uniqueCode, setUniqueCode] = useState<string>("");
-  const [isCopied, setIsCopied] = useState<boolean>(false);
 
   const url = process.env.NEXT_PUBLIC_URL; // TODO: Validate env variable
   const pathName = usePathname();
   const projectId = useMemo(() => pathName.split("/")[2], [pathName]);
-
-  const handleGenerateUniqueLink = () => {
-    const newId = createId();
-    setUniqueCode(newId);
-    setIsCopied(false);
-  };
 
   const uniqueLink = useMemo(
     () => `${url}${pathName}/sus?invite-code=${uniqueCode}`,
@@ -34,18 +26,11 @@ export default function ProjectInviter() {
   );
 
   const handleCreateInvitation = useCallback(async () => {
-    if (!uniqueCode) return;
-    if (!isCopied) {
-      const result = await createSusInvitation(projectId, uniqueCode);
-      if (!result?.errors) {
-        navigator.clipboard.writeText(uniqueLink);
-        setIsCopied(true);
-      }
-    } else {
-      navigator.clipboard.writeText(uniqueLink);
-    }
-    // TODO: Loading spinner + toast would be nice
-  }, [isCopied, projectId, uniqueCode, uniqueLink]);
+    const newId = createId();
+    setUniqueCode(newId);
+
+    await createSusInvitation(projectId, newId);
+  }, [projectId]);
 
   return (
     <Card
@@ -56,7 +41,7 @@ export default function ProjectInviter() {
       <CardHeader>
         <div className="flex gap-x-4 items-center w-full justify-between">
           Invite Guests to Sus Surveys
-          <Button color="primary" onClick={handleGenerateUniqueLink}>
+          <Button color="primary" onClick={handleCreateInvitation}>
             Generate Unique Link
           </Button>
         </div>
@@ -66,11 +51,13 @@ export default function ProjectInviter() {
           {uniqueLink}
         </Snippet>
       </CardBody>
-      <CardFooter>
+      {/* <CardFooter>
         <p className="text-xs text-danger">
           Generated codes not used within 7 days will be deleted.
         </p>
-      </CardFooter>
+      </CardFooter> */}
     </Card>
+
+    // TODO: Display all current invite codes + potentially set limit on how many are created + allow deleting invite codes
   );
 }
