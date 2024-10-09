@@ -21,7 +21,7 @@ export default function ProjectSusScoreComment(
   const { data: score } = useProjectSusScore(projectId);
 
   const scoreComment = useMemo(() => {
-    if (score === undefined) {
+    if (score == null) {
       return "";
     }
     if (score < OK_THRESHOLD) {

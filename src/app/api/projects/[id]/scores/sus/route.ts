@@ -4,7 +4,7 @@ import { calculateSusScore } from "@/utils";
 
 
 export async function GET(_req: NextRequest,
-    { params }: { params: { id: string } }): Promise<NextResponse<number | Error>> {
+    { params }: { params: { id: string } }): Promise<NextResponse<number | null | Error>> {
     const { id } = params;
 
     const project = await prisma.project.findUnique({
@@ -18,6 +18,10 @@ export async function GET(_req: NextRequest,
 
     if (!project) {
         return NextResponse.json(new Error('Project not found'), { status: 404 });
+    }
+
+    if (project.susResponses.length === 0) {
+        return NextResponse.json(null, { status: 200 });
     }
 
     const scores = project.susResponses.map(calculateSusScore);

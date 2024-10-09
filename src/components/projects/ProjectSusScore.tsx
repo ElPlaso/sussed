@@ -34,6 +34,7 @@ export default function ProjectSusScore(props: ProjectSusScoreProps) {
       color={scoreColor}
       showValueLabel={true}
       formatOptions={{}}
+      isIndeterminate={false}
     />
   );
 }
