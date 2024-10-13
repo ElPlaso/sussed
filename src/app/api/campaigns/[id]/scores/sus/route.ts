@@ -7,7 +7,7 @@ export async function GET(_req: NextRequest,
     { params }: { params: { id: string } }): Promise<NextResponse<number | null | Error>> {
     const { id } = params;
 
-    const project = await prisma.project.findUnique({
+    const campaign = await prisma.campaign.findUnique({
         where: {
             id,
         },
@@ -16,15 +16,15 @@ export async function GET(_req: NextRequest,
         }
     })
 
-    if (!project) {
-        return NextResponse.json(new Error('Project not found'), { status: 404 });
+    if (!campaign) {
+        return NextResponse.json(new Error('Campaign not found'), { status: 404 });
     }
 
-    if (project.susResponses.length === 0) {
+    if (campaign.susResponses.length === 0) {
         return NextResponse.json(null, { status: 200 });
     }
 
-    const scores = project.susResponses.map(calculateSusScore);
+    const scores = campaign.susResponses.map(calculateSusScore);
 
     const averageScore = scores.reduce((acc, score) => acc + score, 0) / scores.length;
 

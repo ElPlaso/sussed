@@ -9,7 +9,7 @@ export default function ProjectsHeader() {
   const router = useRouter();
 
   const handleNewProject = () => {
-    router.push("/new");
+    router.push("/projects/new");
   };
 
   return (

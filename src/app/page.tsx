@@ -10,6 +10,13 @@ async function getProjects() {
     where: {
       ownerId: userId,
     },
+    include: {
+      campaigns: {
+        select: {
+          id: true,
+        },
+      },
+    },
   });
 
   return projects;

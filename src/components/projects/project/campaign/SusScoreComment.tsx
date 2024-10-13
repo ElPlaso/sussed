@@ -6,19 +6,17 @@ import {
   GOOD_THRESHOLD,
   OK_THRESHOLD,
 } from "@/components/utils/score-results";
-import useProjectSusScore from "@/hooks/useProjectSusScore";
+import useCampaignSusScore from "@/hooks/useCampaignSusScore";
 import { useMemo } from "react";
 
-export interface ProjectSusScoreCommentProps {
-  projectId: string;
+export interface SusScoreCommentProps {
+  campaignId: string;
 }
 
-export default function ProjectSusScoreComment(
-  props: ProjectSusScoreCommentProps
-) {
-  const { projectId } = props;
+export default function SusScoreComment(props: SusScoreCommentProps) {
+  const { campaignId } = props;
 
-  const { data: score } = useProjectSusScore(projectId);
+  const { data: score } = useCampaignSusScore(campaignId);
 
   const scoreComment = useMemo(() => {
     if (score == null) {

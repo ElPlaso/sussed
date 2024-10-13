@@ -1,35 +1,35 @@
 import SusSuccess from "@/components/projects/project/SusSuccess";
 import prisma from "@/db";
-import { notFound } from "next/navigation";
 
-async function getProject(id: string) {
-  const project = await prisma.project.findUnique({
+async function getCampaign(id: string) {
+  const campaign = await prisma.campaign.findUnique({
     where: {
       id,
     },
     include: {
+      project: true,
       susResponses: true,
       susInvitations: true,
     },
   });
 
-  return project;
+  return campaign;
 }
 
 export default async function SusSuccessPage({
-  params: { id },
+  params: { campaignId },
 }: {
-  params: { id: string };
+  params: { campaignId: string };
 }) {
-  const project = await getProject(id);
+  const campaign = await getCampaign(campaignId);
 
-  if (!project) {
-    notFound();
+  if (!campaign) {
+    throw new Error("Campaign not found");
   }
 
   return (
     <main className="flex flex-col px-12 items-center py-8">
-      <SusSuccess project={project} />
+      <SusSuccess campaign={campaign} />
     </main>
   );
 }

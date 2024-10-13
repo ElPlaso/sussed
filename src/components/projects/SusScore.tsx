@@ -1,19 +1,19 @@
 "use client";
 
-import useProjectSusScore from "@/hooks/useProjectSusScore";
 import { CircularProgress } from "@nextui-org/react";
 import { useMemo } from "react";
 import { GOOD_THRESHOLD, OK_THRESHOLD } from "../utils/score-results";
+import useCampaignSusScore from "@/hooks/useCampaignSusScore";
 
-export interface ProjectSusScoreProps {
-  projectId: string;
-  size?: "lg" | "xl";
+export interface SusScoreProps {
+  campaignId: string;
+  size?: "sm" | "lg";
 }
 
-export default function ProjectSusScore(props: ProjectSusScoreProps) {
-  const { projectId, size = "lg" } = props;
+export default function SusScore(props: SusScoreProps) {
+  const { campaignId, size = "lg" } = props;
 
-  const { data: score } = useProjectSusScore(projectId);
+  const { data: score } = useCampaignSusScore(campaignId);
 
   const scoreColor = useMemo(() => {
     if (score === undefined) {
@@ -29,7 +29,7 @@ export default function ProjectSusScore(props: ProjectSusScoreProps) {
     <CircularProgress
       minValue={0}
       maxValue={100}
-      size="lg"
+      size={size}
       value={score}
       color={scoreColor}
       showValueLabel={true}

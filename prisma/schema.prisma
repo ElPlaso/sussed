@@ -20,15 +20,28 @@ model Project {
   updatedAt   DateTime @updatedAt
   link        String?
 
-  user           User            @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  collaborators Collaborator[]
+  campaigns     Campaign[]
+}
+
+model Campaign {
+  id          String   @id @default(cuid())
+  projectId   String
+  title       String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  project        Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
   susResponses   SusResponse[]
   susInvitations SusInvitation[]
-  collaborators  Collaborator[]
 }
 
 model SusResponse {
   id            String    @id @default(cuid())
-  projectId     String
+  campaignId    String
   respondeeId   String?
   questionOne   SusRating
   questionTwo   SusRating
@@ -42,7 +55,7 @@ model SusResponse {
   questionTen   SusRating
   invitationId  String?
 
-  project    Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  campaign   Campaign       @relation(fields: [campaignId], references: [id], onDelete: Cascade)
   respondee  User?          @relation(fields: [respondeeId], references: [id])
   invitation SusInvitation? @relation(fields: [invitationId], references: [id])
 }
@@ -56,11 +69,11 @@ enum SusRating {
 }
 
 model SusInvitation {
-  id        String   @id
-  projectId String
-  createdAt DateTime @default(now())
+  id         String   @id
+  campaignId String
+  createdAt  DateTime @default(now())
 
-  project     Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  campaign    Campaign      @relation(fields: [campaignId], references: [id], onDelete: Cascade)
   susResponse SusResponse[]
 }
 

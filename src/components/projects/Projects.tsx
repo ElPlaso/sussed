@@ -1,12 +1,12 @@
 "use client";
 
 import { Card, CardBody, CardFooter } from "@nextui-org/react";
-import { Project } from "@prisma/client";
+import { Campaign, Project } from "@prisma/client";
 import { useRouter } from "next/navigation";
-import ProjectSusScore from "./ProjectSusScore";
+import SusScore from "./SusScore";
 
 export interface ProjectsProps {
-  projects: Array<Project>;
+  projects: Array<Project & { campaigns: Array<Pick<Campaign, "id">> }>;
 }
 
 export default function Projects(props: ProjectsProps) {
@@ -32,7 +32,11 @@ export default function Projects(props: ProjectsProps) {
           <CardBody className="p-4">{project.title}</CardBody>
           <CardFooter className="text-small justify-between">
             <span>{project.description}</span>
-            <ProjectSusScore projectId={project.id} />
+            {project.campaigns[project.campaigns.length - 1] && (
+              <SusScore
+                campaignId={project.campaigns[project.campaigns.length - 1].id}
+              />
+            )}
           </CardFooter>
         </Card>
       ))}

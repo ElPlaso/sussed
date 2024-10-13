@@ -34,20 +34,20 @@ const parseSusResponse = (formData: FormData) => {
 };
 
 
-export async function createSusResponse(projectId: string, formData: FormData, invitationCode: string) {
-    const project = await prisma.project.findUnique({
+export async function createSusResponse(campaignId: string, formData: FormData, invitationCode: string) {
+    const campaign = await prisma.campaign.findUnique({
         where: {
-            id: projectId,
+            id: campaignId,
         },
     });
 
-    if (!project) {
+    if (!campaign) {
         throw new Error("Project not found.");
     }
 
     const response = await prisma.susResponse.findFirst({
         where: {
-            projectId,
+            campaignId,
             invitationId: invitationCode,
         }
     })
@@ -70,7 +70,7 @@ export async function createSusResponse(projectId: string, formData: FormData, i
         await prisma.susResponse.create({
             data: {
                 ...validatedFields.data,
-                projectId,
+                campaignId,
                 invitationId: invitationCode,
             },
         });

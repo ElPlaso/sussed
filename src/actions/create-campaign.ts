@@ -6,28 +6,26 @@ import prisma from "../db";
 import { z } from "zod";
 
 
-const projectSchema = z.object({
+const campaignSchema = z.object({
     title: z.string().min(1),
     description: z.string(),
-    link: z.string().url().or(z.literal('')),
 });
 
-const parseProject = (formData: FormData) => {
-    return projectSchema.safeParse({
+const parseCampaign = (formData: FormData) => {
+    return campaignSchema.safeParse({
         title: formData.get("title"),
         description: formData.get("description"),
-        link: formData.get("link"),
     });
 };
 
-export async function createProject(formData: FormData) {
+export async function createCampaign(formData: FormData, projectId: string) {
     const session = await auth();
 
     const userId = session?.user?.id;
 
     if (!userId) throw new Error("User not found");
 
-    const validatedFields = parseProject(formData);
+    const validatedFields = parseCampaign(formData);
 
     if (!validatedFields.success) {
         return {
@@ -36,18 +34,18 @@ export async function createProject(formData: FormData) {
     }
 
     try {
-        await prisma.project.create({
+        await prisma.campaign.create({
             data: {
                 ...validatedFields.data,
-                ownerId: userId,
+                projectId,
             },
         });
 
-        revalidatePath("/");
+        revalidatePath(`/projects/${projectId}`);
     } catch (error) {
         return {
             errors: [
-                "An unexpected error occurred while tying to create this project. Please try again.",
+                "An unexpected error occurred while tying to create this campaign. Please try again.",
             ],
         };
     }

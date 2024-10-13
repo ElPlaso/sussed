@@ -4,43 +4,43 @@ import { createSusResponse } from "@/actions/create-sus-response";
 import SusSurvey from "@/components/sus/SusSurvey";
 import { useInvitationStatus } from "@/hooks/useInvitationStatus";
 import { Card, CardBody } from "@nextui-org/react";
-import { Project, SusInvitation, SusResponse } from "@prisma/client";
+import { Campaign, SusInvitation, SusResponse } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 
 export interface SusWrapperProps {
-  project:
-    | Project & {
+  campaign:
+    | Campaign & {
         susResponses: Array<SusResponse>;
         susInvitations: Array<SusInvitation>;
       };
 }
 
 export default function SusWrapper(props: SusWrapperProps) {
-  const { project } = props;
+  const { campaign } = props;
 
   const { invitationCode, invitationCodeExists, alreadySubmitted } =
-    useInvitationStatus(project);
+    useInvitationStatus(campaign);
 
   const router = useRouter();
 
   const handleSubmit = useCallback(
     async (formData: FormData) => {
-      if (project.id && invitationCode) {
+      if (campaign.id && invitationCode) {
         const result = await createSusResponse(
-          project.id,
+          campaign.id,
           formData,
           invitationCode
         );
         if (!result?.errors) {
           router.push(
-            `/projects/${project.id}/sus/success?invite-code=${invitationCode}`
+            `/projects/${campaign.projectId}/campaigns/${campaign.id}/sus/success?invite-code=${invitationCode}`
           );
         }
         return result;
       }
     },
-    [invitationCode, project.id, router]
+    [campaign.id, campaign.projectId, invitationCode, router]
   );
 
   if (!invitationCodeExists) {

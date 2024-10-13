@@ -1,24 +1,17 @@
 "use client";
 
-import {
-  Button,
-  Card,
-  CardBody,
-  // CardFooter,
-  CardHeader,
-  Snippet,
-} from "@nextui-org/react";
+import { Button, Card, CardBody, CardHeader, Snippet } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
 import { useCallback, useMemo, useState } from "react";
 import { createSusInvitation } from "@/actions/create-sus-invitation";
 import { createId } from "@paralleldrive/cuid2";
 
-export default function ProjectInviter() {
+export default function SusInviter() {
   const [uniqueCode, setUniqueCode] = useState<string>("");
 
   const url = process.env.NEXT_PUBLIC_URL; // TODO: Validate env variable
   const pathName = usePathname();
-  const projectId = useMemo(() => pathName.split("/")[2], [pathName]);
+  const projectId = useMemo(() => pathName.split("/")[4], [pathName]);
 
   const uniqueLink = useMemo(
     () => `${url}${pathName}/sus?invite-code=${uniqueCode}`,
@@ -56,11 +49,6 @@ export default function ProjectInviter() {
           {uniqueLink}
         </Snippet>
       </CardBody>
-      {/* <CardFooter>
-        <p className="text-xs text-danger">
-          Generated codes not used within 7 days will be deleted.
-        </p>
-      </CardFooter> */}
     </Card>
 
     // TODO: Display all current invite codes + potentially set limit on how many are created + allow deleting invite codes

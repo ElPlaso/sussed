@@ -4,7 +4,7 @@ import { auth } from "../auth";
 import prisma from "../db";
 
 
-export async function createSusInvitation(projectId: string, uniqueCode: string) {
+export async function createSusInvitation(campaignId: string, uniqueCode: string) {
     if (!uniqueCode.trim()) {
         throw new Error("Unique code not provided.");
     }
@@ -15,17 +15,20 @@ export async function createSusInvitation(projectId: string, uniqueCode: string)
 
     if (!userId) throw new Error("User not found");
 
-    const project = await prisma.project.findUnique({
+    const campaign = await prisma.campaign.findUnique({
         where: {
-            id: projectId,
+            id: campaignId,
         },
+        include: {
+            project: true,
+        }
     });
 
-    if (!project) {
-        throw new Error("Project not found.");
+    if (!campaign) {
+        throw new Error("Campaign not found.");
     }
 
-    if (project.ownerId !== userId) {
+    if (campaign.project.ownerId !== userId) {
         throw new Error("Unauthorized.");
     }
 
@@ -33,7 +36,7 @@ export async function createSusInvitation(projectId: string, uniqueCode: string)
         await prisma.susInvitation.create({
             data: {
                 id: uniqueCode,
-                projectId,
+                campaignId,
             },
         });
     } catch (error) {

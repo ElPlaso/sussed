@@ -28,17 +28,17 @@ const columns = [
   { key: "questionTen", label: "Q10" },
 ];
 
-export interface ProjectSusResponsesProps {
+export interface SusResponsesProps {
   responses: Array<SusResponse>;
 }
 
-export default function ProjectSusResponses(props: ProjectSusResponsesProps) {
+export default function SusResponses(props: SusResponsesProps) {
   const { responses } = props;
 
   return (
     <div className="flex flex-col gap-y-2">
       <h2 className="text-lg">Responses</h2>
-      <Table aria-label="Project Sus Responses">
+      <Table aria-label="Sus Responses">
         <TableHeader columns={columns}>
           {(column) => (
             <TableColumn key={column.key}>{column.label}</TableColumn>
