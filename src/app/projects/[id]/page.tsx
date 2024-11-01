@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import Campaigns from "@/components/projects/project/Campaigns";
 import ProjectMenu from "@/components/projects/project/ProjectMenu";
 import prisma from "@/db";
@@ -27,6 +28,20 @@ export default async function ProjectPage({
 
   if (!project) {
     throw new Error("Project not found");
+  }
+
+  const userId = (await auth())?.user?.id;
+
+  const isOwner = project.ownerId === userId;
+
+  if (!project.isPublic && !isOwner) {
+    return (
+      <main className="flex w-full">
+        <div className="flex flex-1 flex-col px-12 py-8 gap-y-8">
+          <h1 className="text-xl">You do not have access to this project.</h1>
+        </div>
+      </main>
+    );
   }
 
   return (
