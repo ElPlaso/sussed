@@ -48,9 +48,15 @@ export default async function ProjectPage({
   return (
     <main className="flex w-full justify-center">
       <div className="flex flex-col px-12 py-8 gap-y-8 max-w-[96rem] w-full">
-        <div className="flex gap-x-4 justify-between items-start w-full">
+        <div className="flex flex-col gap-y-4">
           <CampaignBreadcrumbs campaign={campaign} />
-          <CampaignMenu campaign={campaign} />
+          <div className="flex gap-x-4 justify-between items-start w-full">
+            <div className="flex flex-col gap-y-2">
+              <h1 className="text-xl">{campaign.title}</h1>
+              <p className="text-sm">{campaign.description}</p>
+            </div>
+            <CampaignMenu campaign={campaign} />
+          </div>
         </div>
         <SusResults campaignId={campaignId} />
         {isOwner && <SusInviter />}
