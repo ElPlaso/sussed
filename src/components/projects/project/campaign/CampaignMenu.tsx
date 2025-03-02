@@ -16,10 +16,11 @@ import {
   faShare,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-import { deleteProject } from "@/actions/delete-project";
 import { useRouter } from "next/navigation";
 import useToggleState from "@/hooks/useToggleState";
 import { Campaign } from "@prisma/client";
+import EditCampaign from "./EditCampaign";
+import { updateCampaign } from "@/actions/update-campaign";
 
 export interface CampaignDropdownProps {
   campaign: Campaign;
@@ -53,11 +54,11 @@ export default function CampaignMenu(props: CampaignDropdownProps) {
   };
 
   const handleUpdateCampaign = async (formData: FormData) => {
-    // return await updateCampaign(campaign.id, formData);
+    return await updateCampaign(campaign.id, formData);
   };
 
   const handleDeleteCampaign = async () => {
-    await deleteProject(campaign.id);
+    // await deleteCampaign(campaign.id);
     router.push(`/projects/${campaign.projectId}`);
   };
 
@@ -102,6 +103,12 @@ export default function CampaignMenu(props: CampaignDropdownProps) {
           </DropdownSection>
         </DropdownMenu>
       </Dropdown>
+      <EditCampaign
+        campaign={campaign}
+        isModalOpen={isEditCampaignModalOpen}
+        toggleModal={toggleEditCampaignModal}
+        onSubmit={handleUpdateCampaign}
+      />
     </>
   );
 }

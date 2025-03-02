@@ -13,3 +13,15 @@ export const parseProject = (formData: FormData) => {
         link: formData.get("link"),
     });
 };
+
+const campaignSchema = z.object({
+    title: z.string().min(1),
+    description: z.string(),
+});
+
+export const parseCampaign = (formData: FormData) => {
+    return campaignSchema.safeParse({
+        title: formData.get("title"),
+        description: formData.get("description"),
+    });
+};

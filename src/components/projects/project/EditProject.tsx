@@ -14,7 +14,9 @@ export default function EditProject(props: EditProjectProps) {
 
   const handleAction = async (_prevState: unknown, formData: FormData) => {
     const result = await onSubmit(formData);
-    toggleModal();
+    if (!result?.errors) {
+      toggleModal();
+    }
     return result;
   };
 
