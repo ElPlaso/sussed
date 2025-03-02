@@ -5,12 +5,22 @@ import { auth } from "../auth";
 import prisma from "../db";
 import { parseProject } from "./utils";
 
-export async function createProject(formData: FormData) {
+export async function updateProject(projectId: string, formData: FormData) {
     const session = await auth();
 
     const userId = session?.user?.id;
 
     if (!userId) throw new Error("User not found");
+
+    const project = await prisma.project.findUnique({
+        where: {
+            id: projectId,
+        },
+    });
+
+    if (project?.ownerId !== userId) {
+        throw new Error("Unauthorized to update project");
+    }
 
     const validatedFields = parseProject(formData);
 
@@ -21,10 +31,12 @@ export async function createProject(formData: FormData) {
     }
 
     try {
-        await prisma.project.create({
+        await prisma.project.update({
+            where: {
+                id: projectId,
+            },
             data: {
                 ...validatedFields.data,
-                ownerId: userId,
             },
         });
 
@@ -32,7 +44,7 @@ export async function createProject(formData: FormData) {
     } catch (error) {
         return {
             errors: [
-                "An unexpected error occurred while tying to create this project. Please try again.",
+                "An unexpected error occurred while tying to update this project. Please try again.",
             ],
         };
     }

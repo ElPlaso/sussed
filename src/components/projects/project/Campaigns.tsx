@@ -19,6 +19,10 @@ const columns = [
     key: "title",
     label: "TITLE",
   },
+  {
+    key: "description",
+    label: "DESCRIPTION",
+  },
   { key: "numResponses", label: "NUMBER OF RESPONSES" },
   { key: "score", label: "SCORE" },
 ];
@@ -67,6 +71,7 @@ export default function Campaigns(props: CampaignsProps) {
           {(item) => (
             <TableRow className="!cursor-pointer" key={item.id}>
               <TableCell>{item.title}</TableCell>
+              <TableCell>{item.description}</TableCell>
               <TableCell>{item.susResponses.length}</TableCell>
               <TableCell>
                 <SusScore campaignId={item.id} />

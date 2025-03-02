@@ -16,49 +16,52 @@ import {
   faShare,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-import { deleteProject } from "@/actions/delete-project";
 import { useRouter } from "next/navigation";
-import EditProject from "./EditProject";
 import useToggleState from "@/hooks/useToggleState";
-import { Project } from "@prisma/client";
-import { updateProject } from "@/actions/update-project";
+import { Campaign } from "@prisma/client";
+import EditCampaign from "./EditCampaign";
+import { updateCampaign } from "@/actions/update-campaign";
 import DangerousActionConfirmation from "@/components/shared/DangerousActionConfirmation";
+import { deleteCampaign } from "@/actions/delete-campaign";
 
-export interface ProjectMenuProps {
-  project: Project;
+export interface CampaignDropdownProps {
+  campaign: Campaign;
 }
 
-export default function ProjectMenu(props: ProjectMenuProps) {
-  const { project } = props;
+export default function CampaignMenu(props: CampaignDropdownProps) {
+  const { campaign } = props;
 
-  const [isEditProjectModalOpen, toggleEditProjectModal] = useToggleState();
-  const [isDeleteProjectModalOpen, toggleDeleteProjectModal] = useToggleState();
+  console.log(campaign);
+
+  const [isEditCampaignModalOpen, toggleEditCampaignModal] = useToggleState();
+  const [isDeleteCampaignModalOpen, toggleDeleteCampaignModal] =
+    useToggleState();
 
   const router = useRouter();
 
   const handleAction = async (key: Key) => {
     switch (key) {
       case "edit":
-        toggleEditProjectModal();
+        toggleEditCampaignModal();
         break;
       case "share":
         // TODO
         break;
       case "delete":
-        toggleDeleteProjectModal();
+        toggleDeleteCampaignModal();
         break;
       default:
         break;
     }
   };
 
-  const handleUpdateProject = async (formData: FormData) => {
-    return await updateProject(project.id, formData);
+  const handleUpdateCampaign = async (formData: FormData) => {
+    return await updateCampaign(campaign.id, formData);
   };
 
-  const handleDeleteProject = async () => {
-    await deleteProject(project.id);
-    router.push("/");
+  const handleDeleteCampaign = async () => {
+    await deleteCampaign(campaign.id);
+    router.push(`/projects/${campaign.projectId}`);
   };
 
   return (
@@ -102,20 +105,20 @@ export default function ProjectMenu(props: ProjectMenuProps) {
           </DropdownSection>
         </DropdownMenu>
       </Dropdown>
-      <EditProject
-        project={project}
-        isModalOpen={isEditProjectModalOpen}
-        toggleModal={toggleEditProjectModal}
-        onSubmit={handleUpdateProject}
+      <EditCampaign
+        campaign={campaign}
+        isModalOpen={isEditCampaignModalOpen}
+        toggleModal={toggleEditCampaignModal}
+        onSubmit={handleUpdateCampaign}
       />
       <DangerousActionConfirmation
         title="Delete Project"
         message="Are you sure you want to delete this project? All of its data will be
-          lost."
+                lost."
         confirmLabel="Yes, Delete"
-        isModalOpen={isDeleteProjectModalOpen}
-        toggleModal={toggleDeleteProjectModal}
-        onDelete={handleDeleteProject}
+        isModalOpen={isDeleteCampaignModalOpen}
+        toggleModal={toggleDeleteCampaignModal}
+        onDelete={handleDeleteCampaign}
       />
     </>
   );
