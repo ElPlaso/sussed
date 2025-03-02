@@ -6,7 +6,6 @@ import {
   ModalBody,
   Button,
 } from "@nextui-org/react";
-import { Input } from "postcss";
 import { useFormState } from "react-dom";
 
 export interface DeleteProjectProps {

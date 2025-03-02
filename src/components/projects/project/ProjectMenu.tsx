@@ -8,7 +8,7 @@ import {
   DropdownSection,
   DropdownTrigger,
 } from "@nextui-org/react";
-import React, { Key, useState } from "react";
+import React, { Key } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEdit,
@@ -19,39 +19,45 @@ import {
 import { deleteProject } from "@/actions/delete-project";
 import { useRouter } from "next/navigation";
 import DeleteProject from "./DeleteProject";
+import EditProject from "./EditProject";
+import useToggleState from "@/hooks/useToggleState";
+import { Project } from "@prisma/client";
+import { updateProject } from "@/actions/update-project";
 
 export interface ProjectDropdownProps {
-  projectId: string;
+  project: Project;
 }
 
 export default function ProjectDropdown(props: ProjectDropdownProps) {
-  const { projectId } = props;
+  const { project } = props;
 
-  const [isDeleteProjectModalOpen, setDeleteProjectModalOpen] = useState(false);
-  const toggleDeleteProjectMOdal = () => {
-    setDeleteProjectModalOpen((prev) => !prev);
-  };
+  const [isEditProjectModalOpen, toggleEditProjectModal] = useToggleState();
+  const [isDeleteProjectModalOpen, toggleDeleteProjectModal] = useToggleState();
 
   const router = useRouter();
 
   const handleAction = async (key: Key) => {
     switch (key) {
       case "edit":
-        // TODO
+        toggleEditProjectModal();
         break;
       case "share":
         // TODO
         break;
       case "delete":
-        toggleDeleteProjectMOdal();
+        toggleDeleteProjectModal();
         break;
       default:
         break;
     }
   };
 
+  const handleUpdateProject = async (formData: FormData) => {
+    return await updateProject(project.id, formData);
+  };
+
   const handleDeleteProject = async () => {
-    await deleteProject(projectId);
+    await deleteProject(project.id);
     router.push("/");
   };
 
@@ -96,9 +102,15 @@ export default function ProjectDropdown(props: ProjectDropdownProps) {
           </DropdownSection>
         </DropdownMenu>
       </Dropdown>
+      <EditProject
+        project={project}
+        isModalOpen={isEditProjectModalOpen}
+        toggleModal={toggleEditProjectModal}
+        onSubmit={handleUpdateProject}
+      />
       <DeleteProject
         isModalOpen={isDeleteProjectModalOpen}
-        toggleModal={toggleDeleteProjectMOdal}
+        toggleModal={toggleDeleteProjectModal}
         onDelete={handleDeleteProject}
       />
     </>

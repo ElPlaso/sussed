@@ -69,7 +69,7 @@ export default function NewCampaign(props: NewCampaignProps) {
       <Modal backdrop="transparent" isOpen={isModalOpen} onClose={toggleModal}>
         <ModalContent>
           <ModalHeader className="flex flex-col gap-1">
-            New PCampaig
+            New Campaign
           </ModalHeader>
           <ModalBody>
             <form action={formAction} className="flex flex-col gap-y-8">
