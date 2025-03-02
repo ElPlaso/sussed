@@ -21,4 +21,7 @@ export default {
             return session
         },
     },
+    pages: {
+        signIn: '/auth/signin',
+    },
 } satisfies NextAuthConfig

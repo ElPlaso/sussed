@@ -1,6 +1,5 @@
 "use client";
 
-import Layout from "@/components/layout/Layout";
 import { NextUIProvider } from "@nextui-org/react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { SessionProvider } from "next-auth/react";
@@ -25,7 +24,7 @@ export default function Providers(props: ProvidersProps) {
           attribute="class"
           {...themeProps}
         >
-          <Layout>{children}</Layout>
+          {children}
         </NextThemesProvider>
       </NextUIProvider>
     </SessionProvider>
