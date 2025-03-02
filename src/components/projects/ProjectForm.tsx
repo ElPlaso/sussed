@@ -96,7 +96,7 @@ export default function ProjectForm(props: ProjectFormProps) {
           Cancel
         </Button>
         <SubmitButton className="bg-primary-500 dark:bg-primary-400 text-white max-md:w-full">
-          {project ? "Update Project" : "Add Project"}
+          {project ? "Save" : "Add Project"}
         </SubmitButton>
       </div>
     </form>
