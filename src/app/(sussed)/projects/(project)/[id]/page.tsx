@@ -55,7 +55,7 @@ export default async function ProjectPage({
             </Link>
             <p className="text-sm">{project.description}</p>
           </div>
-          <ProjectMenu />
+          <ProjectMenu projectId={project.id} />
         </div>
         <Campaigns projectId={project.id} campaigns={project.campaigns || []} />
       </div>
