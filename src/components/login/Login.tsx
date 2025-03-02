@@ -18,6 +18,7 @@ export default function Login() {
           <Image
             src="/favicon.ico"
             alt="Sussed Logo"
+            className="dark:invert"
             width={120}
             height={120}
           />
