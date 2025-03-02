@@ -43,7 +43,7 @@ export async function updateCampaign(campaignId: string, formData: FormData) {
             },
         });
 
-        revalidatePath(`/projects/${campaign.projectId}`);
+        revalidatePath(`/projects/${campaign.projectId}/`);
     } catch (error) {
         return {
             errors: [

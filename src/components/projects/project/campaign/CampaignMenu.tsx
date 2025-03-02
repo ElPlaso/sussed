@@ -21,6 +21,8 @@ import useToggleState from "@/hooks/useToggleState";
 import { Campaign } from "@prisma/client";
 import EditCampaign from "./EditCampaign";
 import { updateCampaign } from "@/actions/update-campaign";
+import DangerousActionConfirmation from "@/components/shared/DangerousActionConfirmation";
+import { deleteCampaign } from "@/actions/delete-campaign";
 
 export interface CampaignDropdownProps {
   campaign: Campaign;
@@ -58,7 +60,7 @@ export default function CampaignMenu(props: CampaignDropdownProps) {
   };
 
   const handleDeleteCampaign = async () => {
-    // await deleteCampaign(campaign.id);
+    await deleteCampaign(campaign.id);
     router.push(`/projects/${campaign.projectId}`);
   };
 
@@ -108,6 +110,15 @@ export default function CampaignMenu(props: CampaignDropdownProps) {
         isModalOpen={isEditCampaignModalOpen}
         toggleModal={toggleEditCampaignModal}
         onSubmit={handleUpdateCampaign}
+      />
+      <DangerousActionConfirmation
+        title="Delete Project"
+        message="Are you sure you want to delete this project? All of its data will be
+                lost."
+        confirmLabel="Yes, Delete"
+        isModalOpen={isDeleteCampaignModalOpen}
+        toggleModal={toggleDeleteCampaignModal}
+        onDelete={handleDeleteCampaign}
       />
     </>
   );

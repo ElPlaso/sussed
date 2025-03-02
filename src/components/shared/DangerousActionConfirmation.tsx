@@ -8,26 +8,29 @@ import {
 } from "@nextui-org/react";
 import { useFormState } from "react-dom";
 
-export interface DeleteProjectProps {
+export interface DangerousActionConfirmationProps {
+  title: string;
+  message: string;
+  confirmLabel: string;
   isModalOpen: boolean;
   toggleModal: () => void;
   onDelete: () => void;
 }
 
-export default function DeleteProject(props: DeleteProjectProps) {
-  const { isModalOpen, toggleModal, onDelete } = props;
+export default function DangerousActionConfirmation(
+  props: DangerousActionConfirmationProps
+) {
+  const { title, message, confirmLabel, isModalOpen, toggleModal, onDelete } =
+    props;
 
   const [_, formAction] = useFormState(onDelete, null);
 
   return (
     <Modal backdrop="transparent" isOpen={isModalOpen} onClose={toggleModal}>
       <ModalContent>
-        <ModalHeader className="flex flex-col gap-1">
-          Delete Project
-        </ModalHeader>
+        <ModalHeader className="flex flex-col gap-1">{title}</ModalHeader>
         <ModalBody>
-          Are you sure you want to delete this project? All of its data will be
-          lost.
+          {message}
           <form
             action={formAction}
             className="flex gap-x-4 max-md:w-full justify-end"
@@ -36,7 +39,7 @@ export default function DeleteProject(props: DeleteProjectProps) {
               Cancel
             </Button>
             <SubmitButton className="bg-danger-500 dark:bg-danger-400 text-white max-md:w-full">
-              Yes, Delete
+              {confirmLabel}
             </SubmitButton>
           </form>
         </ModalBody>

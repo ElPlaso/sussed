@@ -18,11 +18,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { deleteProject } from "@/actions/delete-project";
 import { useRouter } from "next/navigation";
-import DeleteProject from "./DeleteProject";
 import EditProject from "./EditProject";
 import useToggleState from "@/hooks/useToggleState";
 import { Project } from "@prisma/client";
 import { updateProject } from "@/actions/update-project";
+import DangerousActionConfirmation from "@/components/shared/DangerousActionConfirmation";
 
 export interface ProjectMenuProps {
   project: Project;
@@ -108,7 +108,11 @@ export default function ProjectMenu(props: ProjectMenuProps) {
         toggleModal={toggleEditProjectModal}
         onSubmit={handleUpdateProject}
       />
-      <DeleteProject
+      <DangerousActionConfirmation
+        title="Delete Project"
+        message="Are you sure you want to delete this project? All of its data will be
+          lost."
+        confirmLabel="Yes, Delete"
         isModalOpen={isDeleteProjectModalOpen}
         toggleModal={toggleDeleteProjectModal}
         onDelete={handleDeleteProject}
