@@ -2,7 +2,6 @@ import {
   Dropdown,
   NavbarItem,
   DropdownTrigger,
-  Button,
   DropdownMenu,
   DropdownItem,
   Avatar,

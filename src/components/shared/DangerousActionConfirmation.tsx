@@ -23,6 +23,7 @@ export default function DangerousActionConfirmation(
   const { title, message, confirmLabel, isModalOpen, toggleModal, onDelete } =
     props;
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, formAction] = useFormState(onDelete, null);
 
   return (

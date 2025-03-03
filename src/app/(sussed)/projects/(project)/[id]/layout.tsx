@@ -1,4 +1,3 @@
-import { auth } from "@/auth";
 import prisma from "@/db";
 import { notFound } from "next/navigation";
 

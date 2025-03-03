@@ -1,6 +1,5 @@
 import SusWrapper from "@/components/projects/project/SusWrapper";
 import prisma from "@/db";
-import { notFound } from "next/navigation";
 
 async function getCampaign(id: string) {
   const campaign = await prisma.campaign.findUnique({
