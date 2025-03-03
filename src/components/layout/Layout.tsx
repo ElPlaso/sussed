@@ -8,6 +8,7 @@ import { SidebarContext } from "./layout-context";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setLocked] = useLockedBody(false);
   const handleToggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);

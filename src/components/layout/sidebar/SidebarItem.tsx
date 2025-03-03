@@ -16,7 +16,7 @@ export const SidebarItem = ({
   isActive,
   href = "",
 }: SidebarItemProps) => {
-  const { collapsed, setCollapsed } = useSidebarContext();
+  const { setCollapsed } = useSidebarContext();
 
   const handleClick = () => {
     if (window.innerWidth < 768) {
