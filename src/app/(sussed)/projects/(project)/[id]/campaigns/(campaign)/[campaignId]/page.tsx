@@ -55,7 +55,7 @@ export default async function ProjectPage({
               <h1 className="text-xl">{campaign.title}</h1>
               <p className="text-sm">{campaign.description}</p>
             </div>
-            <CampaignMenu campaign={campaign} />
+            {isOwner && <CampaignMenu campaign={campaign} />}
           </div>
         </div>
         <SusResults campaignId={campaignId} />
