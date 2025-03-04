@@ -42,7 +42,7 @@ export default function ProjectMenu(props: ProjectMenuProps) {
         toggleEditProjectModal();
         break;
       case "share":
-        // TODO
+        navigator.clipboard.writeText(window.location.href);
         break;
       case "delete":
         toggleDeleteProjectModal();
@@ -73,7 +73,10 @@ export default function ProjectMenu(props: ProjectMenuProps) {
             />
           </Button>
         </DropdownTrigger>
-        <DropdownMenu onAction={handleAction}>
+        <DropdownMenu
+          onAction={handleAction}
+          disabledKeys={!project.isPublic ? ["share"] : undefined}
+        >
           <DropdownSection aria-label="Actions">
             <DropdownItem
               key="edit"
