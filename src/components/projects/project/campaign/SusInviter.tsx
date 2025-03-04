@@ -22,7 +22,7 @@ export default function SusInviter() {
 
   const url = process.env.NEXT_PUBLIC_URL; // TODO: Validate env variable
   const pathName = usePathname();
-  const projectId = useMemo(() => pathName.split("/")[4], [pathName]);
+  const campaignId = useMemo(() => pathName.split("/")[4], [pathName]);
 
   const uniqueLink = useMemo(
     () => `${url}${pathName}/sus?invite-code=${uniqueCode}`,
@@ -33,8 +33,8 @@ export default function SusInviter() {
     const newId = createId();
     setUniqueCode(newId);
 
-    await createSusInvitation(projectId, newId);
-  }, [projectId]);
+    await createSusInvitation(campaignId, newId);
+  }, [campaignId]);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, formAction] = useFormState(onGenerate, null);
@@ -58,7 +58,7 @@ export default function SusInviter() {
       </CardHeader>
       <CardBody>
         <Snippet
-          symbol=""
+          hideSymbol
           variant="bordered"
           className="overflow-x-auto"
           disableCopy={!uniqueCode}

@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import CampaignInvitationsBreadcrumbs from "@/components/projects/project/campaign/invitations/CampaignInvitationBreadcrumbs";
+import Invitations from "@/components/projects/project/campaign/invitations/Invitations";
 import prisma from "@/db";
 
 // TODO: Can DRY up
@@ -50,7 +51,7 @@ export default async function InvitationsPage({
           <CampaignInvitationsBreadcrumbs campaign={campaign} />
           <h1 className="text-xl">Invitations</h1>
         </div>
-        {/* TODO: Add invitations table  */}
+        <Invitations invitations={campaign.susInvitations} />
       </div>
     </main>
   );
