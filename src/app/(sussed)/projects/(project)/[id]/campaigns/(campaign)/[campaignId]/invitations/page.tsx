@@ -57,7 +57,10 @@ export default async function InvitationsPage({
           <h1 className="text-xl">Invitations</h1>
           <NewInvitation campaignId={campaign.id} />
         </div>
-        <Invitations invitations={campaign.susInvitations} />
+        <Invitations
+          invitations={campaign.susInvitations}
+          responses={campaign.susResponses}
+        />
       </div>
     </main>
   );
