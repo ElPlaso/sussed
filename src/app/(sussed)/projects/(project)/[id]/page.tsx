@@ -59,9 +59,12 @@ export default async function ProjectPage({
                 {project.isPublic ? "Public" : "Private"}
               </Chip>
             </div>
-            <Link size="sm" href={project.link || undefined}>
-              {project.link}
-            </Link>
+            {project.link && (
+              <Link isExternal showAnchorIcon size="sm" href={project.link}>
+                {project.link}
+              </Link>
+            )}
+
             <p className="text-sm">{project.description}</p>
           </div>
           {isOwner && <ProjectMenu project={project} />}

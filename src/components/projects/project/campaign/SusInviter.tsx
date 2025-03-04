@@ -1,12 +1,21 @@
 "use client";
 
-import { Card, CardBody, CardHeader, Snippet } from "@heroui/react";
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Divider,
+  Link,
+  Snippet,
+} from "@heroui/react";
 import { usePathname } from "next/navigation";
 import { useCallback, useMemo, useState } from "react";
 import { createSusInvitation } from "@/actions/create-sus-invitation";
 import { createId } from "@paralleldrive/cuid2";
 import SubmitButton from "@/components/shared/SubmitButton";
 import { useFormState } from "react-dom";
+import NextLink from "next/link";
 
 export default function SusInviter() {
   const [uniqueCode, setUniqueCode] = useState<string>("");
@@ -31,7 +40,7 @@ export default function SusInviter() {
   const [_, formAction] = useFormState(onGenerate, null);
 
   return (
-    // TODO: Display all current invite codes + potentially set limit on how many are created + allow deleting invite codes
+    // TODO: Potentially set limit on how many invite codes are created
     <Card
       isBlurred
       className="border-none bg-background/60 dark:bg-default-100/50"
@@ -57,6 +66,12 @@ export default function SusInviter() {
           {uniqueLink}
         </Snippet>
       </CardBody>
+      <Divider />
+      <CardFooter>
+        <Link as={NextLink} href={`${url}${pathName}/invitations`}>
+          manage invitations
+        </Link>
+      </CardFooter>
     </Card>
   );
 }
