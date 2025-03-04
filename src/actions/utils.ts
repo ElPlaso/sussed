@@ -4,6 +4,7 @@ const projectSchema = z.object({
     title: z.string().min(1),
     description: z.string(),
     link: z.string().url().or(z.literal('')),
+    isPublic: z.boolean(),
 });
 
 export const parseProject = (formData: FormData) => {
@@ -11,6 +12,7 @@ export const parseProject = (formData: FormData) => {
         title: formData.get("title"),
         description: formData.get("description"),
         link: formData.get("link"),
+        isPublic: formData.get("is-public") === "on",
     });
 };
 

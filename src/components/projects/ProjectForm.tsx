@@ -2,11 +2,11 @@
 
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Textarea, Input, Button } from "@nextui-org/react";
+import { Textarea, Input, Button, Switch } from "@nextui-org/react";
 import SubmitButton from "../shared/SubmitButton";
 import { Project } from "@prisma/client";
 import { useFormState } from "react-dom";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 export interface ProjectFormState {
   errors?: Array<string>;
@@ -37,6 +37,8 @@ export default function ProjectForm(props: ProjectFormProps) {
       }) || []
     );
   }, [state]);
+
+  const [isSetPublic, setSetPublic] = useState(project?.isPublic || false);
 
   return (
     <form className="flex flex-col gap-y-8" action={formAction}>
@@ -90,6 +92,15 @@ export default function ProjectForm(props: ProjectFormProps) {
           }
           defaultValue={project?.link || undefined}
         />
+        <Switch
+          size="sm"
+          name="is-public"
+          isSelected={isSetPublic}
+          value={isSetPublic ? "on" : "off"}
+          onChange={() => setSetPublic(!isSetPublic)}
+        >
+          Public Project?
+        </Switch>
       </div>
       <div className="flex gap-x-4 max-md:w-full justify-end">
         <Button className="max-md:w-full" onClick={onCancel}>
