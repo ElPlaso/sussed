@@ -1,13 +1,14 @@
 "use client";
 
 import {
+  addToast,
   Button,
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownSection,
   DropdownTrigger,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import React, { Key } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -46,6 +47,11 @@ export default function CampaignMenu(props: CampaignDropdownProps) {
         break;
       case "share":
         navigator.clipboard.writeText(window.location.href);
+        addToast({
+          title: "Campaign link copied to clipboard!",
+          color: "primary",
+          variant: "flat",
+        });
         break;
       case "delete":
         toggleDeleteCampaignModal();

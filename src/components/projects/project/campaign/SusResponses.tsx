@@ -8,7 +8,7 @@ import {
   TableBody,
   TableRow,
   TableCell,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { SusResponse } from "@prisma/client";
 
 const columns = [

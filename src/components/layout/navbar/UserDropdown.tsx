@@ -5,7 +5,7 @@ import {
   DropdownMenu,
   DropdownTrigger,
   NavbarItem,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import React from "react";
 import ThemeToggle from "./ThemeToggle";
 import { signOut, useSession } from "next-auth/react";

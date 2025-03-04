@@ -1,5 +1,5 @@
 import SubmitButton from "@/components/shared/SubmitButton";
-import { Textarea, Input, Button } from "@nextui-org/react";
+import { Textarea, Input, Button } from "@heroui/react";
 import { Campaign } from "@prisma/client";
 import { useMemo } from "react";
 import { useFormState } from "react-dom";

@@ -7,7 +7,7 @@ import {
   ModalBody,
   ModalContent,
   ModalHeader,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import CampaignForm from "./campaign/CampaignForm";
 import useToggleState from "@/hooks/useToggleState";
 

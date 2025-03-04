@@ -5,7 +5,7 @@ import {
   ModalHeader,
   ModalBody,
   Button,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { useFormState } from "react-dom";
 
 export interface DangerousActionConfirmationProps {

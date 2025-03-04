@@ -1,6 +1,6 @@
 "use client";
 
-import { Navbar as NextNavbar, NavbarContent } from "@nextui-org/react";
+import { Navbar as NextNavbar, NavbarContent } from "@heroui/react";
 import React from "react";
 import SidebarButton from "./SidebarButton";
 import NotificationsDropdown from "./NotificationsDropdown";

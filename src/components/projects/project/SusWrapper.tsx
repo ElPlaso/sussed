@@ -3,7 +3,7 @@
 import { createSusResponse } from "@/actions/create-sus-response";
 import SusSurvey from "@/components/sus/SusSurvey";
 import { useInvitationStatus } from "@/hooks/useInvitationStatus";
-import { Card, CardBody } from "@nextui-org/react";
+import { Card, CardBody } from "@heroui/react";
 import { Campaign, SusInvitation, SusResponse } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";

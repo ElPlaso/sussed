@@ -1,13 +1,14 @@
 "use client";
 
 import {
+  addToast,
   Button,
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownSection,
   DropdownTrigger,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import React, { Key } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -43,6 +44,11 @@ export default function ProjectMenu(props: ProjectMenuProps) {
         break;
       case "share":
         navigator.clipboard.writeText(window.location.href);
+        addToast({
+          title: "Project link copied to clipboard!",
+          color: "primary",
+          variant: "flat",
+        });
         break;
       case "delete":
         toggleDeleteProjectModal();

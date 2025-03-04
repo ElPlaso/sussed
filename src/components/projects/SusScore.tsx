@@ -1,6 +1,6 @@
 "use client";
 
-import { CircularProgress } from "@nextui-org/react";
+import { CircularProgress } from "@heroui/react";
 import { useMemo } from "react";
 import { GOOD_THRESHOLD, OK_THRESHOLD } from "../utils/score-results";
 import useCampaignSusScore from "@/hooks/useCampaignSusScore";

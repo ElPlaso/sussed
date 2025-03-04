@@ -2,7 +2,7 @@
 
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Textarea, Input, Button, Switch } from "@nextui-org/react";
+import { Textarea, Input, Button, Switch } from "@heroui/react";
 import SubmitButton from "../shared/SubmitButton";
 import { Project } from "@prisma/client";
 import { useFormState } from "react-dom";

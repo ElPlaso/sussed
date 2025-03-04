@@ -1,6 +1,6 @@
 "use client";
 
-import { RadioGroup, Radio, CardBody, Card } from "@nextui-org/react";
+import { RadioGroup, Radio, CardBody, Card } from "@heroui/react";
 import SubmitButton from "../shared/SubmitButton";
 import { useMemo } from "react";
 import { useFormState } from "react-dom";

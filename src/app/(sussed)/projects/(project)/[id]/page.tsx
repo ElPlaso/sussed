@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 import Campaigns from "@/components/projects/project/Campaigns";
 import ProjectMenu from "@/components/projects/project/ProjectMenu";
 import prisma from "@/db";
-import { Chip, Link } from "@nextui-org/react";
+import { Chip, Link } from "@heroui/react";
 
 async function getProject(id: string) {
   const project = await prisma.project.findUnique({
