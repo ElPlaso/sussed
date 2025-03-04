@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 import Campaigns from "@/components/projects/project/Campaigns";
 import ProjectMenu from "@/components/projects/project/ProjectMenu";
 import prisma from "@/db";
-import { Link } from "@nextui-org/react";
+import { Chip, Link } from "@nextui-org/react";
 
 async function getProject(id: string) {
   const project = await prisma.project.findUnique({
@@ -49,7 +49,16 @@ export default async function ProjectPage({
       <div className="flex flex-col px-12 py-8 gap-y-8 max-w-[96rem] w-full">
         <div className="flex gap-x-4 justify-between items-start w-full">
           <div className="flex flex-col gap-y-2">
-            <h1 className="text-xl">{project.title}</h1>
+            <div className="flex gap-x-2 items-center">
+              <h1 className="text-xl">{project.title}</h1>
+              <Chip
+                variant="dot"
+                color={project.isPublic ? "primary" : "danger"}
+                size="sm"
+              >
+                {project.isPublic ? "Public" : "Private"}
+              </Chip>
+            </div>
             <Link size="sm" href={project.link || undefined}>
               {project.link}
             </Link>
