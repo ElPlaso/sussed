@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { auth } from "../auth";
 import prisma from "../db";
 
@@ -39,6 +40,8 @@ export async function createSusInvitation(campaignId: string, uniqueCode: string
                 campaignId,
             },
         });
+
+        revalidatePath(`/projects/${campaign.projectId}/campaigns/${campaignId}`);
     } catch (error) {
         return {
             errors: [

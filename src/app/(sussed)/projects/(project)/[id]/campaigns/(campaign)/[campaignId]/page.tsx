@@ -14,6 +14,7 @@ async function getCampaign(id: string) {
     include: {
       project: true,
       susResponses: true,
+      susInvitations: true,
     },
   });
 
@@ -60,7 +61,10 @@ export default async function ProjectPage({
         </div>
         <SusResults campaignId={campaignId} />
         {isOwner && <SusInviter />}
-        <SusResponses responses={campaign?.susResponses || []} />
+        <SusResponses
+          responses={campaign?.susResponses || []}
+          numInvitations={campaign.susInvitations.length}
+        />
       </div>
     </main>
   );

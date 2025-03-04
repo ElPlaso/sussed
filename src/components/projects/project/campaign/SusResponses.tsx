@@ -30,14 +30,20 @@ const columns = [
 
 export interface SusResponsesProps {
   responses: Array<SusResponse>;
+  numInvitations: number;
 }
 
 export default function SusResponses(props: SusResponsesProps) {
-  const { responses } = props;
+  const { responses, numInvitations } = props;
 
   return (
     <div className="flex flex-col gap-y-2">
-      <h2 className="text-lg">Responses</h2>
+      <div className="flex justify-between items-center gap-x-4">
+        <h2 className="text-lg">Responses</h2>
+        <div className="text-sm">
+          {responses.length} / {numInvitations}
+        </div>
+      </div>
       <Table aria-label="Sus Responses">
         <TableHeader columns={columns}>
           {(column) => (
