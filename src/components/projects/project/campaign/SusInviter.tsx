@@ -12,7 +12,6 @@ import {
 import { usePathname } from "next/navigation";
 import { useCallback, useMemo, useState } from "react";
 import { createSusInvitation } from "@/actions/create-sus-invitation";
-import { createId } from "@paralleldrive/cuid2";
 import SubmitButton from "@/components/shared/SubmitButton";
 import { useFormState } from "react-dom";
 import NextLink from "next/link";
@@ -30,10 +29,11 @@ export default function SusInviter() {
   );
 
   const onGenerate = useCallback(async () => {
-    const newId = createId();
-    setUniqueCode(newId);
-
-    await createSusInvitation(campaignId, newId);
+    const result = await createSusInvitation(campaignId);
+    if (result.type === "result" && result.result) {
+      setUniqueCode(result.result.id);
+    }
+    // TODO: Handle error?
   }, [campaignId]);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -17,6 +17,10 @@ import { useMemo } from "react";
 const columns = [
   { key: "id", label: "ID" },
   {
+    key: "dateCreated",
+    label: "CREATED",
+  },
+  {
     key: "isSurveySubmitted",
     label: "SURVEY SUBMITTED",
   },
@@ -48,6 +52,7 @@ export default function Invitations(props: InvitationsProps) {
         {(item) => (
           <TableRow key={item.id}>
             <TableCell>{item.id}</TableCell>
+            <TableCell>{item.createdAt.toLocaleString("en-NZ")}</TableCell>
             <TableCell>
               <Checkbox readOnly isSelected={false} />
             </TableCell>

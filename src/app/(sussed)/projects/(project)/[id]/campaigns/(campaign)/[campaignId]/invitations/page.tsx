@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import CampaignInvitationsBreadcrumbs from "@/components/projects/project/campaign/invitations/CampaignInvitationBreadcrumbs";
 import Invitations from "@/components/projects/project/campaign/invitations/Invitations";
+import NewInvitation from "@/components/projects/project/campaign/invitations/NewInvitation";
 import prisma from "@/db";
 
 // TODO: Can DRY up
@@ -12,7 +13,11 @@ async function getCampaign(id: string) {
     include: {
       project: true,
       susResponses: true,
-      susInvitations: true,
+      susInvitations: {
+        orderBy: {
+          createdAt: "desc",
+        },
+      },
     },
   });
 
@@ -46,10 +51,11 @@ export default async function InvitationsPage({
 
   return (
     <main className="flex w-full justify-center">
-      <div className="flex flex-col px-12 py-8 gap-y-8 max-w-[96rem] w-full">
-        <div className="flex flex-col gap-y-4">
-          <CampaignInvitationsBreadcrumbs campaign={campaign} />
+      <div className="flex flex-col px-12 py-8 gap-y-4 max-w-[96rem] w-full">
+        <CampaignInvitationsBreadcrumbs campaign={campaign} />
+        <div className="flex gap-x-4 justify-between items-center w-full">
           <h1 className="text-xl">Invitations</h1>
+          <NewInvitation campaignId={campaign.id} />
         </div>
         <Invitations invitations={campaign.susInvitations} />
       </div>

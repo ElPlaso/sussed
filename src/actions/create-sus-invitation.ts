@@ -3,12 +3,11 @@
 import { revalidatePath } from "next/cache";
 import { auth } from "../auth";
 import prisma from "../db";
+import { createId } from "@paralleldrive/cuid2";
 
 
-export async function createSusInvitation(campaignId: string, uniqueCode: string) {
-    if (!uniqueCode.trim()) {
-        throw new Error("Unique code not provided.");
-    }
+export async function createSusInvitation(campaignId: string) {
+    const uniqueCode = createId();
 
     const session = await auth();
 
@@ -34,7 +33,7 @@ export async function createSusInvitation(campaignId: string, uniqueCode: string
     }
 
     try {
-        await prisma.susInvitation.create({
+        const result = await prisma.susInvitation.create({
             data: {
                 id: uniqueCode,
                 campaignId,
@@ -42,8 +41,13 @@ export async function createSusInvitation(campaignId: string, uniqueCode: string
         });
 
         revalidatePath(`/projects/${campaign.projectId}/campaigns/${campaignId}`);
+
+        return {
+            type: "result", result
+        };
     } catch (error) {
         return {
+            type: "errors",
             errors: [
                 "An unexpected error occurred while tying to create a sus invitation. Please try again.",
             ],
