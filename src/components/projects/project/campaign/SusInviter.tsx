@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Card, CardBody, CardHeader, Snippet } from "@nextui-org/react";
+import { Button, Card, CardBody, CardHeader, Snippet } from "@heroui/react";
 import { usePathname } from "next/navigation";
 import { useCallback, useMemo, useState } from "react";
 import { createSusInvitation } from "@/actions/create-sus-invitation";
@@ -26,6 +26,7 @@ export default function SusInviter() {
   }, [projectId]);
 
   return (
+    // TODO: Display all current invite codes + potentially set limit on how many are created + allow deleting invite codes
     <Card
       isBlurred
       className="border-none bg-background/60 dark:bg-default-100/50"
@@ -50,7 +51,5 @@ export default function SusInviter() {
         </Snippet>
       </CardBody>
     </Card>
-
-    // TODO: Display all current invite codes + potentially set limit on how many are created + allow deleting invite codes
   );
 }

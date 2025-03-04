@@ -1,4 +1,4 @@
-import { Modal, ModalContent, ModalBody, ModalHeader } from "@nextui-org/react";
+import { Modal, ModalContent, ModalBody, ModalHeader } from "@heroui/react";
 import ProjectForm, { ProjectFormState } from "../ProjectForm";
 import { Project } from "@prisma/client";
 

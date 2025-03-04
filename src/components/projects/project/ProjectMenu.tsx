@@ -1,13 +1,14 @@
 "use client";
 
 import {
+  addToast,
   Button,
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownSection,
   DropdownTrigger,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import React, { Key } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -42,7 +43,12 @@ export default function ProjectMenu(props: ProjectMenuProps) {
         toggleEditProjectModal();
         break;
       case "share":
-        // TODO
+        navigator.clipboard.writeText(window.location.href);
+        addToast({
+          title: "Project link copied to clipboard!",
+          color: "primary",
+          variant: "flat",
+        });
         break;
       case "delete":
         toggleDeleteProjectModal();
@@ -73,7 +79,10 @@ export default function ProjectMenu(props: ProjectMenuProps) {
             />
           </Button>
         </DropdownTrigger>
-        <DropdownMenu onAction={handleAction}>
+        <DropdownMenu
+          onAction={handleAction}
+          disabledKeys={!project.isPublic ? ["share"] : undefined}
+        >
           <DropdownSection aria-label="Actions">
             <DropdownItem
               key="edit"

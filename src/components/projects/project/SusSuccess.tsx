@@ -1,7 +1,7 @@
 "use client";
 
 import { useInvitationStatus } from "@/hooks/useInvitationStatus";
-import { Card, CardBody, CardHeader } from "@nextui-org/react";
+import { Card, CardBody, CardHeader } from "@heroui/react";
 import { Campaign, Project, SusInvitation, SusResponse } from "@prisma/client";
 
 export interface SusSuccessProps {

@@ -7,7 +7,7 @@ import {
   TableBody,
   TableRow,
   TableCell,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { Campaign, SusResponse } from "@prisma/client";
 import SusScore from "../SusScore";
 import NewCampaign from "./NewCampaign";

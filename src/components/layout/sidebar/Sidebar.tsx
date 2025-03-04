@@ -4,7 +4,7 @@ import { useSidebarContext } from "../layout-context";
 import { SidebarItem } from "./SidebarItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
-import { tv } from "@nextui-org/react";
+import { tv } from "@heroui/react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 

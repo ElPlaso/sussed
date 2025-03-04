@@ -1,6 +1,6 @@
 "use client";
 
-import { NextUIProvider } from "@nextui-org/react";
+import { HeroUIProvider, ToastProvider } from "@heroui/react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { SessionProvider } from "next-auth/react";
 import { ThemeProviderProps } from "next-themes/dist/types";
@@ -18,15 +18,16 @@ export default function Providers(props: ProvidersProps) {
 
   return (
     <SessionProvider>
-      <NextUIProvider navigate={router.push}>
+      <HeroUIProvider navigate={router.push}>
         <NextThemesProvider
           defaultTheme="system"
           attribute="class"
           {...themeProps}
         >
+          <ToastProvider />
           {children}
         </NextThemesProvider>
-      </NextUIProvider>
+      </HeroUIProvider>
     </SessionProvider>
   );
 }

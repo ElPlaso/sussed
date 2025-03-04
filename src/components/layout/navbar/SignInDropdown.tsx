@@ -5,7 +5,7 @@ import {
   DropdownMenu,
   DropdownItem,
   Avatar,
-} from "@nextui-org/react";
+} from "@heroui/react";
 
 export default function SignInDropdown() {
   return (

@@ -1,13 +1,14 @@
 "use client";
 
 import {
+  addToast,
   Button,
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownSection,
   DropdownTrigger,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import React, { Key } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -18,20 +19,20 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import useToggleState from "@/hooks/useToggleState";
-import { Campaign } from "@prisma/client";
+import { Campaign, Project } from "@prisma/client";
 import EditCampaign from "./EditCampaign";
 import { updateCampaign } from "@/actions/update-campaign";
 import DangerousActionConfirmation from "@/components/shared/DangerousActionConfirmation";
 import { deleteCampaign } from "@/actions/delete-campaign";
 
 export interface CampaignDropdownProps {
-  campaign: Campaign;
+  campaign: Campaign & {
+    project: Project;
+  };
 }
 
 export default function CampaignMenu(props: CampaignDropdownProps) {
   const { campaign } = props;
-
-  console.log(campaign);
 
   const [isEditCampaignModalOpen, toggleEditCampaignModal] = useToggleState();
   const [isDeleteCampaignModalOpen, toggleDeleteCampaignModal] =
@@ -45,7 +46,12 @@ export default function CampaignMenu(props: CampaignDropdownProps) {
         toggleEditCampaignModal();
         break;
       case "share":
-        // TODO
+        navigator.clipboard.writeText(window.location.href);
+        addToast({
+          title: "Campaign link copied to clipboard!",
+          color: "primary",
+          variant: "flat",
+        });
         break;
       case "delete":
         toggleDeleteCampaignModal();
@@ -76,7 +82,10 @@ export default function CampaignMenu(props: CampaignDropdownProps) {
             />
           </Button>
         </DropdownTrigger>
-        <DropdownMenu onAction={handleAction}>
+        <DropdownMenu
+          onAction={handleAction}
+          disabledKeys={!campaign.project.isPublic ? ["share"] : []}
+        >
           <DropdownSection aria-label="Actions">
             <DropdownItem
               key="edit"

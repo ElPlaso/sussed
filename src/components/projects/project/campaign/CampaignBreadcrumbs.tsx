@@ -1,6 +1,6 @@
 "use client";
 
-import { Breadcrumbs, BreadcrumbItem } from "@nextui-org/react";
+import { Breadcrumbs, BreadcrumbItem } from "@heroui/react";
 import { Campaign, Project } from "@prisma/client";
 
 export interface CampaignBreadcrumbsProps {
