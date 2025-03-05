@@ -53,7 +53,7 @@ model SusResponse {
   questionEight SusRating
   questionNine  SusRating
   questionTen   SusRating
-  invitationId  String?
+  invitationId  String?   @unique
 
   campaign   Campaign       @relation(fields: [campaignId], references: [id], onDelete: Cascade)
   respondee  User?          @relation(fields: [respondeeId], references: [id])
@@ -73,8 +73,8 @@ model SusInvitation {
   campaignId String
   createdAt  DateTime @default(now())
 
-  campaign    Campaign      @relation(fields: [campaignId], references: [id], onDelete: Cascade)
-  susResponse SusResponse[]
+  campaign    Campaign     @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  susResponse SusResponse?
 }
 
 model Collaborator {
