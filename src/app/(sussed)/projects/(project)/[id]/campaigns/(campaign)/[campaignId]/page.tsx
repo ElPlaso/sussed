@@ -61,7 +61,7 @@ export default async function CampaignPage({
         </div>
         <SusResults campaignId={campaignId} />
         {isOwner && <SusInviter />}
-        <SusResponses responses={campaign?.susResponses || []} />
+        <SusResponses responses={campaign.susResponses} />
       </div>
     </main>
   );
