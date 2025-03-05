@@ -2,18 +2,18 @@ import { Checkbox } from "@heroui/react";
 import { useMemo } from "react";
 
 export interface InvitationResponseStatusProps {
-  itemId: string;
+  invitationId: string;
   respondedToInvitationIds: Array<string>;
 }
 
 export default function InvitationResponseStatus(
   props: InvitationResponseStatusProps
 ) {
-  const { itemId, respondedToInvitationIds } = props;
+  const { invitationId, respondedToInvitationIds } = props;
 
   const isRespondedTo = useMemo(
-    () => respondedToInvitationIds.includes(itemId),
-    [itemId, respondedToInvitationIds]
+    () => respondedToInvitationIds.includes(invitationId),
+    [invitationId, respondedToInvitationIds]
   );
 
   return <Checkbox readOnly isSelected={isRespondedTo} />;

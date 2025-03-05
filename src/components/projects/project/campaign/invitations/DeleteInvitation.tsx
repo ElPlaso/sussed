@@ -7,22 +7,22 @@ import { Button } from "@heroui/react";
 import { useMemo } from "react";
 
 export interface DeleteInvitationProps {
-  itemId: string;
+  invitationId: string;
   respondedToInvitationIds: Array<string>;
 }
 
 export default function DeleteInvitation(props: DeleteInvitationProps) {
-  const { itemId, respondedToInvitationIds } = props;
+  const { invitationId, respondedToInvitationIds } = props;
 
   const [isModalOpen, toggleModal] = useToggleState();
 
   const isDisabled = useMemo(
-    () => respondedToInvitationIds.includes(itemId),
-    [itemId, respondedToInvitationIds]
+    () => respondedToInvitationIds.includes(invitationId),
+    [invitationId, respondedToInvitationIds]
   );
 
   const onDelete = async () => {
-    await deleteSusInvitation(itemId);
+    await deleteSusInvitation(invitationId);
     toggleModal();
   };
 
@@ -34,16 +34,19 @@ export default function DeleteInvitation(props: DeleteInvitationProps) {
         isDisabled={isDisabled}
         onPress={toggleModal}
         variant="light"
-        color={isDisabled ? "default" : "danger"}
+        color={"danger"}
+        className={isDisabled ? "text-neutral-500" : ""}
       />
-      <DangerousActionConfirmation
-        isModalOpen={isModalOpen}
-        toggleModal={toggleModal}
-        title="Delete Invitation"
-        message="Are you sure you want to delete this invitation? This cannot be undone."
-        confirmLabel={"Yes, Delete"}
-        onDangerousAction={onDelete}
-      />
+      {isModalOpen && (
+        <DangerousActionConfirmation
+          isModalOpen={isModalOpen}
+          toggleModal={toggleModal}
+          title="Delete Invitation"
+          message="Are you sure you want to delete this invitation? This cannot be undone."
+          confirmLabel={"Yes, Delete"}
+          onDangerousAction={onDelete}
+        />
+      )}
     </>
   );
 }

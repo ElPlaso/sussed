@@ -7,13 +7,12 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  Snippet,
 } from "@heroui/react";
 import { SusInvitation, SusResponse } from "@prisma/client";
-import { usePathname } from "next/navigation";
 import { useMemo } from "react";
 import InvitationResponseStatus from "./InvitationResponseStatus";
 import DeleteInvitation from "./DeleteInvitation";
+import ShareInvitation from "./ShareInvitation";
 
 const columns = [
   { key: "id", label: "ID" },
@@ -38,11 +37,6 @@ export interface InvitationsProps {
 
 export default function Invitations(props: InvitationsProps) {
   const { invitations, responses } = props;
-
-  const url = process.env.NEXT_PUBLIC_URL; // TODO: Validate env variable
-  const pathName = usePathname();
-  const projectId = useMemo(() => pathName.split("/")[2], [pathName]);
-  const campaignId = useMemo(() => pathName.split("/")[4], [pathName]);
 
   const respondedToInvitationIds = useMemo(
     () => responses.map((r) => r.invitationId),
@@ -69,24 +63,18 @@ export default function Invitations(props: InvitationsProps) {
               <TableCell>{item.createdAt.toLocaleString("en-NZ")}</TableCell>
               <TableCell>
                 <InvitationResponseStatus
-                  itemId={item.id}
+                  invitationId={item.id}
                   respondedToInvitationIds={respondedToInvitationIds}
                 />
               </TableCell>
               <TableCell>
-                <div className="flex gap-x-2 items-center">
-                  <Snippet
-                    hideSymbol
-                    classNames={{
-                      base: "-ml-2 p-0",
-                    }}
-                    codeString={`${url}/projects/${projectId}/campaigns/${campaignId}/sus?invite-code=${item.id}`}
-                    tooltipProps={{
-                      content: "Copy link",
-                    }}
+                <div className="flex items-center">
+                  <ShareInvitation
+                    invitationId={item.id}
+                    respondedToInvitationIds={respondedToInvitationIds}
                   />
                   <DeleteInvitation
-                    itemId={item.id}
+                    invitationId={item.id}
                     respondedToInvitationIds={respondedToInvitationIds}
                   />
                 </div>
