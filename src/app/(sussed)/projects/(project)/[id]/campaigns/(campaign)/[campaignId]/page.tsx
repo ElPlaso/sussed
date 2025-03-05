@@ -14,13 +14,14 @@ async function getCampaign(id: string) {
     include: {
       project: true,
       susResponses: true,
+      susInvitations: true,
     },
   });
 
   return campaign;
 }
 
-export default async function ProjectPage({
+export default async function CampaignPage({
   params: { campaignId },
 }: {
   params: { campaignId: string };
@@ -33,7 +34,7 @@ export default async function ProjectPage({
 
   const userId = (await auth())?.user?.id;
 
-  const isOwner = campaign?.project.ownerId === userId;
+  const isOwner = campaign.project.ownerId === userId;
 
   if (!campaign.project.isPublic && !isOwner) {
     return (
@@ -60,7 +61,7 @@ export default async function ProjectPage({
         </div>
         <SusResults campaignId={campaignId} />
         {isOwner && <SusInviter />}
-        <SusResponses responses={campaign?.susResponses || []} />
+        <SusResponses responses={campaign.susResponses} />
       </div>
     </main>
   );

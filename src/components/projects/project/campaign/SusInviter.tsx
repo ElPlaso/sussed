@@ -1,32 +1,46 @@
 "use client";
 
-import { Button, Card, CardBody, CardHeader, Snippet } from "@heroui/react";
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Divider,
+  Link,
+  Snippet,
+} from "@heroui/react";
 import { usePathname } from "next/navigation";
 import { useCallback, useMemo, useState } from "react";
 import { createSusInvitation } from "@/actions/create-sus-invitation";
-import { createId } from "@paralleldrive/cuid2";
+import SubmitButton from "@/components/shared/SubmitButton";
+import { useFormState } from "react-dom";
+import NextLink from "next/link";
 
 export default function SusInviter() {
   const [uniqueCode, setUniqueCode] = useState<string>("");
 
   const url = process.env.NEXT_PUBLIC_URL; // TODO: Validate env variable
   const pathName = usePathname();
-  const projectId = useMemo(() => pathName.split("/")[4], [pathName]);
+  const campaignId = useMemo(() => pathName.split("/")[4], [pathName]);
 
   const uniqueLink = useMemo(
     () => `${url}${pathName}/sus?invite-code=${uniqueCode}`,
     [url, pathName, uniqueCode]
   );
 
-  const handleCreateInvitation = useCallback(async () => {
-    const newId = createId();
-    setUniqueCode(newId);
+  const onGenerate = useCallback(async () => {
+    const result = await createSusInvitation(campaignId);
+    if (result.type === "result" && result.result) {
+      setUniqueCode(result.result.id);
+    }
+    // TODO: Handle error?
+  }, [campaignId]);
 
-    await createSusInvitation(projectId, newId);
-  }, [projectId]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, formAction] = useFormState(onGenerate, null);
 
   return (
-    // TODO: Display all current invite codes + potentially set limit on how many are created + allow deleting invite codes
+    // TODO: Potentially set limit on how many invite codes are created
     <Card
       isBlurred
       className="border-none bg-background/60 dark:bg-default-100/50"
@@ -35,14 +49,16 @@ export default function SusInviter() {
       <CardHeader>
         <div className="flex gap-x-4 items-center w-full justify-between">
           Invite Guests to Sus Surveys
-          <Button color="primary" onClick={handleCreateInvitation}>
-            Generate Unique Link
-          </Button>
+          <form action={formAction}>
+            <SubmitButton className="bg-primary text-white">
+              Generate Unique Link
+            </SubmitButton>
+          </form>
         </div>
       </CardHeader>
       <CardBody>
         <Snippet
-          symbol=""
+          hideSymbol
           variant="bordered"
           className="overflow-x-auto"
           disableCopy={!uniqueCode}
@@ -50,6 +66,12 @@ export default function SusInviter() {
           {uniqueLink}
         </Snippet>
       </CardBody>
+      <Divider />
+      <CardFooter>
+        <Link as={NextLink} href={`${url}${pathName}/invitations`}>
+          manage invitations
+        </Link>
+      </CardFooter>
     </Card>
   );
 }

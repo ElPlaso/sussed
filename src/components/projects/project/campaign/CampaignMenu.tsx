@@ -127,7 +127,7 @@ export default function CampaignMenu(props: CampaignDropdownProps) {
         confirmLabel="Yes, Delete"
         isModalOpen={isDeleteCampaignModalOpen}
         toggleModal={toggleDeleteCampaignModal}
-        onDelete={handleDeleteCampaign}
+        onDangerousAction={handleDeleteCampaign}
       />
     </>
   );
