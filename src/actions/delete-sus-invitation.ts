@@ -5,7 +5,7 @@ import { auth } from "../auth";
 import prisma from "../db";
 
 
-export async function createSusInvitation(id: string) {
+export async function deleteSusInvitation(id: string) {
     const session = await auth();
 
     const userId = session?.user?.id;

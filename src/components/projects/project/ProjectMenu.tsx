@@ -124,7 +124,7 @@ export default function ProjectMenu(props: ProjectMenuProps) {
         confirmLabel="Yes, Delete"
         isModalOpen={isDeleteProjectModalOpen}
         toggleModal={toggleDeleteProjectModal}
-        onDelete={handleDeleteProject}
+        onDangerousAction={handleDeleteProject}
       />
     </>
   );

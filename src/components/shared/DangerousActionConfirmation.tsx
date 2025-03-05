@@ -14,17 +14,23 @@ export interface DangerousActionConfirmationProps {
   confirmLabel: string;
   isModalOpen: boolean;
   toggleModal: () => void;
-  onDelete: () => void;
+  onDangerousAction: () => void;
 }
 
 export default function DangerousActionConfirmation(
   props: DangerousActionConfirmationProps
 ) {
-  const { title, message, confirmLabel, isModalOpen, toggleModal, onDelete } =
-    props;
+  const {
+    title,
+    message,
+    confirmLabel,
+    isModalOpen,
+    toggleModal,
+    onDangerousAction,
+  } = props;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, formAction] = useFormState(onDelete, null);
+  const [_, formAction] = useFormState(onDangerousAction, null);
 
   return (
     <Modal backdrop="transparent" isOpen={isModalOpen} onClose={toggleModal}>

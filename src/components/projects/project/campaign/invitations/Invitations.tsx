@@ -7,12 +7,13 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  Checkbox,
   Snippet,
 } from "@heroui/react";
 import { SusInvitation, SusResponse } from "@prisma/client";
 import { usePathname } from "next/navigation";
 import { useMemo } from "react";
+import InvitationResponseStatus from "./InvitationResponseStatus";
+import DeleteInvitation from "./DeleteInvitation";
 
 const columns = [
   { key: "id", label: "ID" },
@@ -67,23 +68,28 @@ export default function Invitations(props: InvitationsProps) {
               <TableCell>{item.id}</TableCell>
               <TableCell>{item.createdAt.toLocaleString("en-NZ")}</TableCell>
               <TableCell>
-                <Checkbox
-                  readOnly
-                  isSelected={respondedToInvitationIds.includes(item.id)}
+                <InvitationResponseStatus
+                  itemId={item.id}
+                  respondedToInvitationIds={respondedToInvitationIds}
                 />
               </TableCell>
               <TableCell>
-                <Snippet
-                  hideSymbol
-                  classNames={{
-                    base: "bg-transparent -ml-2",
-                  }}
-                  codeString={`${url}/projects/${projectId}/campaigns/${campaignId}/sus?invite-code=${item.id}`}
-                  tooltipProps={{
-                    content: "Copy link",
-                  }}
-                />
-                {/* TODO: Allow deleting invitations */}
+                <div className="flex gap-x-2 items-center">
+                  <Snippet
+                    hideSymbol
+                    classNames={{
+                      base: "-ml-2 p-0",
+                    }}
+                    codeString={`${url}/projects/${projectId}/campaigns/${campaignId}/sus?invite-code=${item.id}`}
+                    tooltipProps={{
+                      content: "Copy link",
+                    }}
+                  />
+                  <DeleteInvitation
+                    itemId={item.id}
+                    respondedToInvitationIds={respondedToInvitationIds}
+                  />
+                </div>
               </TableCell>
             </TableRow>
           )}
