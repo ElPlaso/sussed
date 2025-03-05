@@ -2,13 +2,13 @@ import { notFound } from "next/navigation";
 import prisma from "@/db";
 
 async function getCampaign(id: string) {
-  const project = await prisma.campaign.findUnique({
+  const campaign = await prisma.campaign.findUnique({
     where: {
       id,
     },
   });
 
-  return project;
+  return campaign;
 }
 
 export default async function CampaignLayout({
