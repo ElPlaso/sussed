@@ -45,7 +45,7 @@ export default function Invitations(props: InvitationsProps) {
 
   return (
     <>
-      {responses.length && invitations.length && (
+      {responses.length > 0 && invitations.length > 0 && (
         <div className="text-sm text-neutral-500">
           {responses.length} responded / {invitations.length} invitations
         </div>

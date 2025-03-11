@@ -26,7 +26,7 @@ export default function ShareInvitation(props: ShareInvitationProps) {
   const handleShare = () => {
     if (isDisabled) return;
     navigator.clipboard.writeText(
-      `${url}/projects/${projectId}/campaigns/${campaignId}/sus?invite-code${invitationId}`
+      `${url}/projects/${projectId}/campaigns/${campaignId}/sus?invite-code=${invitationId}`
     );
     addToast({
       title: "Invitation link copied to clipboard!",
