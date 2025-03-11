@@ -75,8 +75,6 @@ export async function GET(
     .map((e) => e.join(","))
     .join("\n");
 
-  console.log(rows);
-
   const headers = new Headers();
 
   headers.set("Content-Type", "text/csv");
