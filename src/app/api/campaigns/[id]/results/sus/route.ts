@@ -75,7 +75,7 @@ export async function GET(
     headers.set("Content-Type", "text/csv");
     headers.set(
         "Content-Disposition",
-        `attachment; filename=sussed-${campaign.project.title}-${campaign.title}-results-download.csv`
+        `attachment; filename=sussed-${campaign.project.title}-${campaign.title}-sus-results-download.csv`
     );
 
     return new NextResponse(csvString, {

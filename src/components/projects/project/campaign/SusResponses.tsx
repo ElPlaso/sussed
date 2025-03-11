@@ -9,7 +9,8 @@ import {
   TableRow,
   TableCell,
 } from "@heroui/react";
-import { SusResponse } from "@prisma/client";
+import { Campaign, Project, SusResponse } from "@prisma/client";
+import CampaignResultsDownload from "./CampaignResultsDownload";
 
 const columns = [
   {
@@ -29,15 +30,22 @@ const columns = [
 ];
 
 export interface SusResponsesProps {
-  responses: Array<SusResponse>;
+  campaign: Campaign & {
+    project: Project;
+    susResponses: Array<SusResponse>;
+  };
 }
 
 export default function SusResponses(props: SusResponsesProps) {
-  const { responses } = props;
+  const { campaign } = props;
+  const { susResponses: responses } = campaign;
 
   return (
     <div className="flex flex-col gap-y-2">
-      <h2 className="text-lg">Responses</h2>
+      <div className="flex items-center justify-between gap-x-4">
+        <h2 className="text-lg">Responses</h2>
+        <CampaignResultsDownload campaign={campaign} />
+      </div>
       <Table aria-label="Sus Responses">
         <TableHeader columns={columns}>
           {(column) => (
