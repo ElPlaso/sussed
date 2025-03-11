@@ -9,12 +9,14 @@ import {
   TableRow,
   TableCell,
 } from "@heroui/react";
-import { SusResponse } from "@prisma/client";
+import { Campaign, Project, SusResponse } from "@prisma/client";
+import CampaignResultsDownload from "./CampaignResultsDownload";
+import { useMemo } from "react";
 
 const columns = [
   {
-    key: "respondeeId",
-    label: "NAME",
+    key: "count",
+    label: "Response",
   },
   { key: "questionOne", label: "Q1" },
   { key: "questionTwo", label: "Q2" },
@@ -29,26 +31,44 @@ const columns = [
 ];
 
 export interface SusResponsesProps {
-  responses: Array<SusResponse>;
+  campaign: Campaign & {
+    project: Project;
+    susResponses: Array<SusResponse>;
+  };
 }
 
 export default function SusResponses(props: SusResponsesProps) {
-  const { responses } = props;
+  const { campaign } = props;
+  const { susResponses: responses } = campaign;
+
+  const items = useMemo(
+    () =>
+      responses.map((response, i) => {
+        return {
+          count: `#${i + 1}`,
+          ...response,
+        };
+      }),
+    [responses]
+  );
 
   return (
     <div className="flex flex-col gap-y-2">
-      <h2 className="text-lg">Responses</h2>
+      <div className="flex items-center justify-between gap-x-4">
+        <h2 className="text-lg">Responses</h2>
+        <CampaignResultsDownload campaign={campaign} />
+      </div>
       <Table aria-label="Sus Responses">
         <TableHeader columns={columns}>
           {(column) => (
             <TableColumn key={column.key}>{column.label}</TableColumn>
           )}
         </TableHeader>
-        <TableBody emptyContent={"No responses yet."} items={responses}>
+        <TableBody emptyContent={"No responses yet."} items={items}>
           {(item) => (
             <TableRow key={item.id}>
-              <TableCell>{""}</TableCell>
-              {/* TODO: Display potential user name here*/}
+              <TableCell>{item.count}</TableCell>
+              {/* TODO: Display potential respondee name here*/}
               <TableCell>{susRatingNumbers[item.questionOne]}</TableCell>
               <TableCell>{susRatingNumbers[item.questionTwo]}</TableCell>
               <TableCell>{susRatingNumbers[item.questionThree]}</TableCell>

@@ -34,10 +34,7 @@ export default function UserDropdown() {
           />
         </DropdownTrigger>
       </NavbarItem>
-      <DropdownMenu
-        aria-label="User menu actions"
-        onAction={(actionKey) => console.log({ actionKey })}
-      >
+      <DropdownMenu aria-label="User menu actions">
         <DropdownItem
           key="profile"
           className="flex flex-col justify-start w-full items-start"
@@ -49,7 +46,7 @@ export default function UserDropdown() {
           key="logout"
           color="danger"
           className="text-danger"
-          onClick={handleSignOut}
+          onPress={handleSignOut}
           startContent={<FontAwesomeIcon icon={faSignOut} />}
         >
           Log Out

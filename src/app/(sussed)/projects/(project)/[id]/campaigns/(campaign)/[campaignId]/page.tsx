@@ -13,7 +13,11 @@ async function getCampaign(id: string) {
     },
     include: {
       project: true,
-      susResponses: true,
+      susResponses: {
+        orderBy: {
+          createdAt: "desc",
+        },
+      },
       susInvitations: true,
     },
   });
@@ -61,7 +65,7 @@ export default async function CampaignPage({
         </div>
         <SusResults campaignId={campaignId} />
         {isOwner && <SusInviter />}
-        <SusResponses responses={campaign.susResponses} />
+        <SusResponses campaign={campaign} />
       </div>
     </main>
   );

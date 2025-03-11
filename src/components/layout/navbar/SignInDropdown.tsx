@@ -15,10 +15,7 @@ export default function SignInDropdown() {
           <Avatar as="button" color="default" size="sm" />
         </DropdownTrigger>
       </NavbarItem>
-      <DropdownMenu
-        aria-label="User menu actions"
-        onAction={(actionKey) => console.log({ actionKey })}
-      >
+      <DropdownMenu aria-label="User menu actions">
         <DropdownItem key="login" href="/api/auth/signin">
           Log In
         </DropdownItem>
