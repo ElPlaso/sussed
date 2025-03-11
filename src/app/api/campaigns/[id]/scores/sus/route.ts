@@ -2,9 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/db";
 import { calculateSusScore } from "@/utils";
 
-
-export async function GET(_req: NextRequest,
-    { params }: { params: { id: string } }): Promise<NextResponse<number | null | Error>> {
+export async function GET(
+    _req: NextRequest,
+    { params }: { params: { id: string } }
+): Promise<NextResponse<number | null | string>> {
     const { id } = params;
 
     const campaign = await prisma.campaign.findUnique({
@@ -13,11 +14,11 @@ export async function GET(_req: NextRequest,
         },
         include: {
             susResponses: true,
-        }
-    })
+        },
+    });
 
     if (!campaign) {
-        return NextResponse.json(new Error('Campaign not found'), { status: 404 });
+        return NextResponse.json("Campaign not found", { status: 404 });
     }
 
     if (campaign.susResponses.length === 0) {
@@ -26,9 +27,8 @@ export async function GET(_req: NextRequest,
 
     const scores = campaign.susResponses.map(calculateSusScore);
 
-    const averageScore = scores.reduce((acc, score) => acc + score, 0) / scores.length;
+    const averageScore =
+        scores.reduce((acc, score) => acc + score, 0) / scores.length;
 
     return NextResponse.json(averageScore, { status: 200 });
 }
-
-
