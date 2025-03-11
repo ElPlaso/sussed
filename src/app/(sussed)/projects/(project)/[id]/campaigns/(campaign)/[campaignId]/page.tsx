@@ -13,7 +13,11 @@ async function getCampaign(id: string) {
     },
     include: {
       project: true,
-      susResponses: true,
+      susResponses: {
+        orderBy: {
+          createdAt: "desc",
+        },
+      },
       susInvitations: true,
     },
   });

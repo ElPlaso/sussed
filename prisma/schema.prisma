@@ -54,6 +54,7 @@ model SusResponse {
   questionNine  SusRating
   questionTen   SusRating
   invitationId  String    @unique
+  createdAt     DateTime  @default(now())
 
   campaign   Campaign      @relation(fields: [campaignId], references: [id], onDelete: Cascade)
   respondee  User?         @relation(fields: [respondeeId], references: [id])

@@ -4,83 +4,90 @@ import { auth } from "@/auth";
 import { susRatingNumbers } from "@/utils";
 
 export async function GET(
-    _req: NextRequest,
-    { params }: { params: { id: string } }
+  _req: NextRequest,
+  { params }: { params: { id: string } }
 ) {
-    const { id } = params;
+  const { id } = params;
 
-    const campaign = await prisma.campaign.findUnique({
-        where: {
-            id,
+  const campaign = await prisma.campaign.findUnique({
+    where: {
+      id,
+    },
+    include: {
+      susResponses: {
+        orderBy: {
+          createdAt: "desc",
         },
-        include: {
-            susResponses: true,
-            project: true,
-        },
-    });
+      },
+      project: true,
+    },
+  });
 
-    if (!campaign) {
-        return NextResponse.json("Campaign not found", { status: 404 });
+  if (!campaign) {
+    return NextResponse.json("Campaign not found", { status: 404 });
+  }
+
+  if (!campaign.project.isPublic) {
+    const userId = (await auth())?.user?.id;
+
+    if (userId !== campaign.project.ownerId) {
+      return NextResponse.json("Unauthorized", { status: 401 });
     }
+  }
 
-    if (!campaign.project.isPublic) {
-        const userId = (await auth())?.user?.id;
+  const rows = campaign.susResponses.map((response, i) => {
+    const {
+      questionOne,
+      questionTwo,
+      questionThree,
+      questionFour,
+      questionFive,
+      questionSix,
+      questionSeven,
+      questionEight,
+      questionNine,
+      questionTen,
+    } = response;
 
-        if (userId !== campaign.project.ownerId) {
-            return NextResponse.json("Unauthorized", { status: 401 });
-        }
-    }
+    const responses = [
+      questionOne,
+      questionTwo,
+      questionThree,
+      questionFour,
+      questionFive,
+      questionSix,
+      questionSeven,
+      questionEight,
+      questionNine,
+      questionTen,
+    ];
 
-    const rows = campaign.susResponses.map((response, i) => {
-        const {
-            questionOne,
-            questionTwo,
-            questionThree,
-            questionFour,
-            questionFive,
-            questionSix,
-            questionSeven,
-            questionEight,
-            questionNine,
-            questionTen,
-        } = response;
+    return [
+      `#${i + 1}`,
+      ...responses.map((response) => susRatingNumbers[response]),
+    ];
+  });
 
-        const responses = [
-            questionOne,
-            questionTwo,
-            questionThree,
-            questionFour,
-            questionFive,
-            questionSix,
-            questionSeven,
-            questionEight,
-            questionNine,
-            questionTen,
-        ];
+  const csvString = [
+    ["Response #", "Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9", "Q10"],
+    ...rows,
+  ]
+    .map((e) => e.join(","))
+    .join("\n");
 
-        return [`#${i + 1}`, ...responses.map((response) => susRatingNumbers[response])];
-    });
+  console.log(rows);
 
-    const csvString = [
-        ["Response #", "Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9", "Q10"],
-        ...rows,
-    ]
-        .map((e) => e.join(","))
-        .join("\n");
+  const headers = new Headers();
 
-    console.log(rows);
+  headers.set("Content-Type", "text/csv");
+  headers.set(
+    "Content-Disposition",
+    `attachment; filename=sussed-${campaign.project.title}-${campaign.title}-sus-results-download.csv`
+  );
 
-    const headers = new Headers();
-
-    headers.set("Content-Type", "text/csv");
-    headers.set(
-        "Content-Disposition",
-        `attachment; filename=sussed-${campaign.project.title}-${campaign.title}-sus-results-download.csv`
-    );
-
-    return new NextResponse(csvString, {
-        status: 200,
-        statusText: "OK",
-        headers,
-    });
+  return new NextResponse(csvString, {
+    status: 200,
+    statusText: "OK",
+    headers,
+  });
 }

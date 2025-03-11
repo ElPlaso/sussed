@@ -11,11 +11,12 @@ import {
 } from "@heroui/react";
 import { Campaign, Project, SusResponse } from "@prisma/client";
 import CampaignResultsDownload from "./CampaignResultsDownload";
+import { useMemo } from "react";
 
 const columns = [
   {
-    key: "respondeeId",
-    label: "NAME",
+    key: "count",
+    label: "Response",
   },
   { key: "questionOne", label: "Q1" },
   { key: "questionTwo", label: "Q2" },
@@ -40,6 +41,17 @@ export default function SusResponses(props: SusResponsesProps) {
   const { campaign } = props;
   const { susResponses: responses } = campaign;
 
+  const items = useMemo(
+    () =>
+      responses.map((response, i) => {
+        return {
+          count: `#${i + 1}`,
+          ...response,
+        };
+      }),
+    [responses]
+  );
+
   return (
     <div className="flex flex-col gap-y-2">
       <div className="flex items-center justify-between gap-x-4">
@@ -52,11 +64,11 @@ export default function SusResponses(props: SusResponsesProps) {
             <TableColumn key={column.key}>{column.label}</TableColumn>
           )}
         </TableHeader>
-        <TableBody emptyContent={"No responses yet."} items={responses}>
+        <TableBody emptyContent={"No responses yet."} items={items}>
           {(item) => (
             <TableRow key={item.id}>
-              <TableCell>{""}</TableCell>
-              {/* TODO: Display potential user name here*/}
+              <TableCell>{item.count}</TableCell>
+              {/* TODO: Display potential respondee name here*/}
               <TableCell>{susRatingNumbers[item.questionOne]}</TableCell>
               <TableCell>{susRatingNumbers[item.questionTwo]}</TableCell>
               <TableCell>{susRatingNumbers[item.questionThree]}</TableCell>
