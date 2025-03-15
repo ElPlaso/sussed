@@ -9,6 +9,9 @@
     "lint": "next lint",
     "types": "tsc"
   },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
   "dependencies": {
     "@auth/prisma-adapter": "^1.3.2",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
