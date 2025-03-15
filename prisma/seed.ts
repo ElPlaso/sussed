@@ -10,6 +10,15 @@ async function main() {
       email: "bob@prisma.io",
     },
   });
+
+  await prisma.project.create({
+    data: {
+      id: "project1",
+      title: "Project 1",
+      description: "Project 1 description",
+      ownerId: "bob",
+    },
+  });
 }
 
 main()
