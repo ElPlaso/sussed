@@ -51,6 +51,23 @@ describe("Projects", () => {
     cy.visit("/projects/project1");
     cy.contains("Project not found.");
   });
+
+  it("Should create a new project", () => {
+    cy.visit("/");
+    cy.get("button").contains("New Project").click();
+    cy.url().should("include", "/projects/new");
+    cy.get('input[name="title"]').type("Test Project");
+    cy.get('textarea[name="description"]').type("Test Project description");
+    cy.get('input[name="link"]').type("http://localhost:3000");
+    cy.get("button").contains("Add Project").click();
+    cy.url().should("not.include", "/projects/new");
+    cy.contains("Projects");
+    cy.get("button").contains("New Project");
+    cy.get("button").contains("Test Project").click();
+    cy.contains("Test Project");
+    cy.contains("Test Project description");
+    cy.get("a").contains("http://localhost:3000");
+  });
 });
 
 describe("Permissions", () => {
