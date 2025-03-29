@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "types": "tsc"
+    "types": "tsc",
+    "cy:open": "cypress open"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
@@ -37,6 +38,7 @@
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "autoprefixer": "^10.0.1",
+    "cypress": "^14.2.1",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
     "eslint-plugin-react-hooks": "^4.6.0",
