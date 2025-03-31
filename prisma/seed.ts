@@ -19,6 +19,43 @@ async function main() {
       ownerId: "bob",
     },
   });
+
+  await prisma.project.create({
+    data: {
+      id: "project2",
+      title: "Project 2",
+      description: "Project with existing campaign",
+      ownerId: "bob",
+      campaigns: {
+        create: {
+          id: "project2Campaign1",
+          title: "Project 2 Campaign",
+          description: "Project 2 Campaign description",
+        },
+      },
+    },
+  });
+
+  await prisma.project.create({
+    data: {
+      id: "project3",
+      title: "Project 3",
+      description: "Project with existing campaign and invitation",
+      ownerId: "bob",
+      campaigns: {
+        create: {
+          id: "project3Campaign1",
+          title: "Project 3 Campaign",
+          description: "Project 3 Campaign description",
+          susInvitations: {
+            create: {
+              id: "project3Campaign1Invitation1",
+            },
+          },
+        },
+      },
+    },
+  });
 }
 
 main()
