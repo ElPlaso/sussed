@@ -1,0 +1,48 @@
+name: E2E on Chrome
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  cypress-setup-and-run:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: postgres_db
+          POSTGRES_PASSWORD: postgres_password
+          POSTGRES_PORT: 5432
+          POSTGRES_USER: postgres_user
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup database
+        run: |
+          npm i
+          npx prisma migrate reset --force
+        env:
+          DATABASE_URL: postgres://postgres_user:postgres_password@localhost:5432/postgres_db
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v3
+        with:
+          browser: chrome
+          build: npm run build
+          start: npm run start
+          wait-on: "http://localhost:3000"
+        env:
+          DATABASE_URL: postgres://postgres_user:postgres_password@localhost:5432/postgres_db
+          NEXT_ENV: test
