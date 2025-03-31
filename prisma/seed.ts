@@ -56,6 +56,23 @@ async function main() {
       },
     },
   });
+
+  await prisma.project.create({
+    data: {
+      id: "project4",
+      title: "Project 4",
+      description: "Public project",
+      isPublic: true,
+      ownerId: "bob",
+      campaigns: {
+        create: {
+          id: "project4Campaign1",
+          title: "Project 4 Campaign",
+          description: "A campaign within a public project",
+        },
+      },
+    },
+  });
 }
 
 main()
