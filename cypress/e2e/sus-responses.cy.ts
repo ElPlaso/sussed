@@ -121,4 +121,11 @@ describe("Sus Responses", () => {
       "A response with this invitation code has already been submitted for this project."
     );
   });
+
+  it("Should try submit a response for a non-existant invitation", () => {
+    cy.visit(
+      "projects/project3/campaigns/project3Campaign1/sus?invite-code=fakeInvite"
+    );
+    cy.contains("Invalid invitation code.");
+  });
 });

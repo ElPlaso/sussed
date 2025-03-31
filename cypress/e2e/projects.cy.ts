@@ -68,14 +68,14 @@ describe("Projects", () => {
     cy.contains("Test Project description");
     cy.get("a").contains("http://localhost:3000");
   });
-});
 
-describe("Permissions", () => {
-  before(() => {
-    cy.resetDatabase();
+  it("Should try visit a non-existant project", () => {
+    cy.login();
+    cy.visit("/projects/fakeProject");
+    cy.contains("Project not found.");
   });
 
-  it("Should visit non-owned private project", () => {
+  it("Should try visit non-owned private project", () => {
     cy.visit("/projects/project1");
     cy.contains("You do not have access to this project.");
   });

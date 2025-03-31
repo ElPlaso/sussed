@@ -62,4 +62,9 @@ describe("Campaigns", () => {
     cy.url().should("include", "/projects/project1");
     cy.contains("No campaigns. Please create one to get started!");
   });
+
+  it("Should try visit a non-existant campaign", () => {
+    cy.visit("/projects/project1/campaigns/fakeCampaign");
+    cy.contains("Campaign not found.");
+  });
 });
