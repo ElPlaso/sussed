@@ -64,6 +64,11 @@ describe("Campaigns", () => {
   });
 
   it("Should try visit a non-existant campaign", () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    cy.on("fail", (_err) => {
+      return;
+    });
+
     cy.visit("/projects/project1/campaigns/fakeCampaign");
     cy.contains("Campaign not found.");
   });

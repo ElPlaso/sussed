@@ -18,12 +18,14 @@ describe("Public Projects", () => {
     cy.visit("/projects/project4");
     cy.contains("Project 4");
     cy.contains("Public project");
+    cy.get('svg[data-icon="ellipsis-vertical"]').should("not.exist");
     cy.get("button").contains("Add Campaign").should("not.exist");
   });
 
   it("Should visit a public campaign", () => {
     cy.visit("/projects/project4/campaigns/project4Campaign1");
     cy.contains("Project 4 Campaign");
+    cy.get('svg[data-icon="ellipsis-vertical"]').should("not.exist");
     cy.get("a").contains("manage invitations").should("not.exist");
   });
 
