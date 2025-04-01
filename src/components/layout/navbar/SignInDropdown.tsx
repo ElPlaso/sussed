@@ -1,3 +1,7 @@
+"use client";
+
+import { faMoon } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Dropdown,
   NavbarItem,
@@ -6,6 +10,7 @@ import {
   DropdownItem,
   Avatar,
 } from "@heroui/react";
+import ThemeToggle from "./ThemeToggle";
 
 export default function SignInDropdown() {
   return (
@@ -18,6 +23,14 @@ export default function SignInDropdown() {
       <DropdownMenu aria-label="User menu actions">
         <DropdownItem key="login" href="/api/auth/signin">
           Log In
+        </DropdownItem>
+        <DropdownItem
+          key="switch"
+          startContent={
+            <FontAwesomeIcon className="text-default-500" icon={faMoon} />
+          }
+        >
+          <ThemeToggle />
         </DropdownItem>
       </DropdownMenu>
     </Dropdown>
