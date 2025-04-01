@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/db";
-import { calculateSusScore } from "@/utils";
+import { calculateAverageSusScore } from "@/utils";
 
 export async function GET(
   _req: NextRequest,
@@ -25,10 +25,7 @@ export async function GET(
     return NextResponse.json(null, { status: 200 });
   }
 
-  const scores = campaign.susResponses.map(calculateSusScore);
-
-  const averageScore =
-    scores.reduce((acc, score) => acc + score, 0) / scores.length;
+  const averageScore = calculateAverageSusScore(campaign.susResponses);
 
   return NextResponse.json(averageScore, { status: 200 });
 }
