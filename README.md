@@ -2,6 +2,8 @@
 
 Suss out your app's usability!
 
+![image](https://github.com/user-attachments/assets/2949b860-2934-4f16-890a-c01c5a253b8d)
+
 ## Installation
 
 Install the dependencies:
