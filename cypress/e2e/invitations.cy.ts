@@ -14,8 +14,7 @@ describe("Invitations", () => {
       "include",
       "/projects/project2/campaigns/project2Campaign1/invitations"
     );
-    cy.wait(500);
-    cy.contains("Invitations");
+    cy.get("h1").contains("Invitations");
   });
 
   it("Should create a new invitation", () => {
