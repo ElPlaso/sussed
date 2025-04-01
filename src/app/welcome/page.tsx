@@ -20,8 +20,10 @@ export default async function WelcomePage() {
     <main className="flex flex-col p-16 items-center">
       <div className="w-2/3 max-lg:w-full flex flex-col gap-y-8">
         <div className="flex flex-col gap-y-4 px-12">
-          <h1 className="text-3xl font-extrabold">Welcome to Sussed!</h1>
-          <p className="text-lg max-w-96">
+          <h1 className="text-5xl font-sans font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            Welcome to Sussed.
+          </h1>
+          <p className="text-lg max-w-[36rem]">
             Sussed is an online tool for measuring system usability across
             multiple projects. Easily distribute surveys and analyze the
             results!
