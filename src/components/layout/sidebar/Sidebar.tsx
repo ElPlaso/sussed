@@ -7,6 +7,7 @@ import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { tv } from "@heroui/react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 
 const sidebarStyles = tv({
   base: "bg-background transition-transform h-full fixed -translate-x-full w-64 shrink-0 z-[202] overflow-y-auto border-r border-divider flex-col py-6 px-3 md:ml-0 md:flex md:static md:h-screen md:translate-x-0",
@@ -33,7 +34,7 @@ export default function Sidebar() {
         />
       ) : null}
       <div className={sidebarStyles({ collapsed })}>
-        <div className="flex gap-x-2 items-center px-6">
+        <Link href="/welcome" className="flex gap-x-2 items-center px-6">
           <Image
             src="/favicon.ico"
             alt="Sussed Logo"
@@ -42,7 +43,7 @@ export default function Sidebar() {
             height={40}
           />
           <h1 className="text-2xl font-semibold">Sussed.</h1>
-        </div>
+        </Link>
         <div className="flex flex-col gap-6 mt-9 px-2">
           {user && (
             <SidebarItem

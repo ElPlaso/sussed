@@ -12,7 +12,7 @@ const PROVIDER_ID = "github";
 
 export default function Login() {
   return (
-    <div className="flex justify-center items-center h-screen">
+    <main className="flex justify-center items-center h-screen">
       <Card className="w-96 py-8">
         <CardHeader className="flex flex-col gap-y-2 items-center">
           <Image
@@ -34,6 +34,6 @@ export default function Login() {
           </Button>
         </CardBody>
       </Card>
-    </div>
+    </main>
   );
 }
