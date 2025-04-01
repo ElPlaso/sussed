@@ -9,7 +9,12 @@ export default function NewProjectPage() {
 
   const handleSubmit = async (formData: FormData) => {
     const result = await createProject(formData);
-    if (!result?.errors) {
+    if (
+      !(
+        (result?.errors.filter((error) => !error.includes("url")) || [])
+          .length > 0
+      )
+    ) {
       router.push("/");
     }
     return result;

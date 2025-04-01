@@ -44,6 +44,8 @@ export default async function ProjectPage({
     );
   }
 
+  // TODO: Display owner if project is public
+
   return (
     <main className="flex w-full justify-center">
       <div className="flex flex-col px-12 py-8 gap-y-8 max-w-[96rem] w-full">
@@ -69,7 +71,7 @@ export default async function ProjectPage({
           </div>
           {isOwner && <ProjectMenu project={project} />}
         </div>
-        <Campaigns projectId={project.id} campaigns={project.campaigns || []} />
+        <Campaigns project={project} />
       </div>
     </main>
   );

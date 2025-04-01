@@ -121,8 +121,8 @@ export default function CampaignMenu(props: CampaignDropdownProps) {
         onSubmit={handleUpdateCampaign}
       />
       <DangerousActionConfirmation
-        title="Delete Project"
-        message="Are you sure you want to delete this project? All of its data will be
+        title="Delete Campaign"
+        message="Are you sure you want to delete this campaign? All of its data will be
                 lost."
         confirmLabel="Yes, Delete"
         isModalOpen={isDeleteCampaignModalOpen}

@@ -16,5 +16,11 @@ export default function InvitationResponseStatus(
     [invitationId, respondedToInvitationIds]
   );
 
-  return <Checkbox readOnly isSelected={isRespondedTo} />;
+  return (
+    <Checkbox
+      readOnly
+      isSelected={isRespondedTo}
+      aria-label={isRespondedTo ? "submitted" : "pending"}
+    />
+  );
 }
