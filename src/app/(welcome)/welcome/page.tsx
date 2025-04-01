@@ -5,8 +5,6 @@ import {
   GOOD_THRESHOLD,
   OK_THRESHOLD,
 } from "@/components/utils/score-results";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Button,
   Card,
@@ -160,22 +158,6 @@ export default async function WelcomePage() {
           </ul>
         </div>
       </div>
-
-      <footer className="w-full flex flex-col gap-y-6 bottom-0 p-4 mt-12 pb-6">
-        <Divider />
-        <div className="flex gap-x-4 justify-between">
-          <div>© {new Date().getFullYear()} Sussed</div>
-          <Button
-            as="a"
-            target="_blank"
-            href="https://github.com/ElPlaso/sussed"
-            startContent={<FontAwesomeIcon icon={faGithub} size="sm" />}
-            variant="flat"
-          >
-            View on GitHub
-          </Button>
-        </div>
-      </footer>
     </main>
   );
 }

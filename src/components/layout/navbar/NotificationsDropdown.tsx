@@ -30,7 +30,7 @@ export default function NotificationsDropdown() {
               title: "text-base font-semibold",
             }}
             key="welcome"
-            description="Get started by creating a new project and inviting your respondees 🚀"
+            description="Get started by creating a new project 🚀"
           >
             📣 Welcome to Sussed!
           </DropdownItem>
