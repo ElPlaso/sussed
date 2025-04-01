@@ -97,9 +97,9 @@ export default async function WelcomePage() {
 
         <div className="flex flex-col gap-y-4">
           <p>
-            Step 4: Wait for a response. Your respondee will see a form like in{" "}
+            Step 4: Wait for a response. Your respondee will see a form like{" "}
             <Link target="_blank" href="/examples/sus">
-              this example
+              this
             </Link>
             .
           </p>
