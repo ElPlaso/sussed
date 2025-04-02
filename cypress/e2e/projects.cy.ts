@@ -70,7 +70,7 @@ describe("Projects", () => {
   });
 });
 
-describe.only("Failures", () => {
+describe("Failures", () => {
   before(() => {
     cy.resetDatabase();
   });
