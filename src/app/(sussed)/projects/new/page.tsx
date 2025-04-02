@@ -3,6 +3,13 @@
 import { createProject } from "@/actions/create-project";
 import ProjectForm from "@/components/projects/ProjectForm";
 import { useRouter } from "next/navigation";
+import { Metadata } from "next";
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const metadata: Metadata = {
+  title: "New Project",
+  description: "Create a new project.",
+};
 
 export default function NewProjectPage() {
   const router = useRouter();
