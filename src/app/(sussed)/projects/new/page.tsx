@@ -8,7 +8,7 @@ import { redirect, useRouter } from "next/navigation";
 export default function NewProjectPage() {
   const auth = useSession();
 
-  if (!auth) {
+  if (!auth.data?.user) {
     redirect("/auth/signin");
   }
 
