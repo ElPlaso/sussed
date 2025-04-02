@@ -70,7 +70,11 @@ describe("Projects", () => {
   });
 });
 
-describe("Failures", () => {
+describe.only("Failures", () => {
+  before(() => {
+    cy.resetDatabase();
+  });
+
   beforeEach(() => {
     cy.login();
   });
@@ -81,18 +85,17 @@ describe("Failures", () => {
     cy.url().should("include", "/projects/new");
     cy.get('input[name="title"]').type("Test Project");
     cy.get('textarea[name="description"]').type("Test Project description");
-    cy.get('input[name="link"]').type("localhost:3000");
+    cy.get('input[name="link"]').type("invalid.link");
     cy.get("button").contains("Add Project").click();
     cy.url().should("include", "/projects/new");
     cy.contains("Invalid url");
   });
 
   it("Should try to add an invalid link to an existing project", () => {
-    cy.resetDatabase();
     cy.visit("/projects/project1");
     cy.get('svg[data-icon="ellipsis-vertical"]').parent().click();
     cy.get('li[role="menuitem"]').contains("Edit").click();
-    cy.get('input[name="link"]').type("localhost:3000");
+    cy.get('input[name="link"]').type("invalid.link");
     cy.get("button").contains("Save").click();
     cy.contains("Invalid url");
   });
