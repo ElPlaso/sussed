@@ -70,6 +70,24 @@ describe("Projects", () => {
   });
 });
 
+describe("Failures", () => {
+  beforeEach(() => {
+    cy.login();
+  });
+
+  it("Should try create a new project with an invalid link", () => {
+    cy.visit("/");
+    cy.get("button").contains("New Project").click();
+    cy.url().should("include", "/projects/new");
+    cy.get('input[name="title"]').type("Test Project");
+    cy.get('textarea[name="description"]').type("Test Project description");
+    cy.get('input[name="link"]').type("localhost:3000");
+    cy.get("button").contains("Add Project").click();
+    cy.url().should("include", "/projects/new");
+    cy.contains("Invalid url");
+  });
+});
+
 describe("Permissions", () => {
   before(() => {
     cy.resetDatabase();
