@@ -30,9 +30,10 @@ export async function createProject(formData: FormData) {
 
     revalidatePath("/");
   } catch (error) {
+    console.log(error);
     return {
       errors: [
-        "An unexpected error occurred while tying to create this project. Please try again.",
+        "An unexpected error occurred while trying to create this project. Please try again.",
       ],
     };
   }
