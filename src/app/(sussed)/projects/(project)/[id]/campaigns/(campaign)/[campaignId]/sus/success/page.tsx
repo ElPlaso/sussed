@@ -1,5 +1,6 @@
 import SusSuccess from "@/components/projects/project/SusSuccess";
 import prisma from "@/db";
+import { Metadata } from "next";
 
 async function getCampaign(id: string) {
   const campaign = await prisma.campaign.findUnique({
@@ -15,6 +16,13 @@ async function getCampaign(id: string) {
 
   return campaign;
 }
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const metadata: Metadata = {
+  title: "Success",
+  description:
+    "You have succesfully submitted your response for the SUS survey",
+};
 
 export default async function SusSuccessPage({
   params: { campaignId },
