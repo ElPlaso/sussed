@@ -2,19 +2,21 @@
 
 import { createProject } from "@/actions/create-project";
 import ProjectForm from "@/components/projects/ProjectForm";
-import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { redirect, useRouter } from "next/navigation";
 
 export default function NewProjectPage() {
+  const auth = useSession();
+
+  if (!auth) {
+    redirect("/auth/signin");
+  }
+
   const router = useRouter();
 
   const handleSubmit = async (formData: FormData) => {
     const result = await createProject(formData);
-    if (
-      !(
-        (result?.errors.filter((error) => !error.includes("url")) || [])
-          .length > 0
-      )
-    ) {
+    if (!result?.errors) {
       router.push("/");
     }
     return result;
