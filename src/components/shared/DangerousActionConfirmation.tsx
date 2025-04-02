@@ -42,7 +42,7 @@ export default function DangerousActionConfirmation(
             action={formAction}
             className="flex gap-x-4 max-md:w-full justify-end"
           >
-            <Button className="max-md:w-full" onClick={toggleModal}>
+            <Button className="max-md:w-full" onPress={toggleModal}>
               Cancel
             </Button>
             <SubmitButton className="bg-danger-500 dark:bg-danger-400 text-white max-md:w-full">

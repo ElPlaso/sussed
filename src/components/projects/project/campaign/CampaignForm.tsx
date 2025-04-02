@@ -67,7 +67,7 @@ export default function CampaignForm(props: CampaignFormProps) {
         />
       </div>
       <div className="flex gap-x-4 max-md:w-full justify-end">
-        <Button className="max-md:w-full" onClick={onCancel}>
+        <Button className="max-md:w-full" onPress={onCancel}>
           Cancel
         </Button>
         <SubmitButton className="bg-primary-500 dark:bg-primary-400 text-white max-md:w-full">

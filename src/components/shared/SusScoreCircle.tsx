@@ -24,6 +24,7 @@ export default function SusScoreCircle(props: SusScoreCircleProps) {
 
   return (
     <CircularProgress
+      aria-label={`Sus Score: ${score}`}
       minValue={0}
       maxValue={100}
       size={size}
