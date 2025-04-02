@@ -25,6 +25,22 @@ async function getCampaign(id: string) {
   return campaign;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
+export async function generateMetadata({
+  params: { campaignId },
+}: {
+  params: { campaignId: string };
+}) {
+  const campaign = await getCampaign(campaignId);
+
+  return {
+    title: {
+      template: `${campaign?.title || "Unknown Campaign"} | %s`,
+      default: campaign?.title || "Unknown Campaign",
+    },
+  };
+}
+
 export default async function CampaignPage({
   params: { campaignId },
 }: {

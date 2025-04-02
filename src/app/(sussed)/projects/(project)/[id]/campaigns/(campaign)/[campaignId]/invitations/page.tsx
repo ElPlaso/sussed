@@ -3,6 +3,7 @@ import CampaignInvitationsBreadcrumbs from "@/components/projects/project/campai
 import Invitations from "@/components/projects/project/campaign/invitations/Invitations";
 import NewInvitation from "@/components/projects/project/campaign/invitations/NewInvitation";
 import prisma from "@/db";
+import { Metadata } from "next";
 
 // TODO: Can DRY up
 async function getCampaign(id: string) {
@@ -23,6 +24,11 @@ async function getCampaign(id: string) {
 
   return campaign;
 }
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const metadata: Metadata = {
+  title: "Invitations",
+};
 
 export default async function InvitationsPage({
   params: { campaignId },

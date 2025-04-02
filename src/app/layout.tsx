@@ -7,9 +7,12 @@ const inter = Inter({ subsets: ["latin"] });
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = {
-  title: "Sussed",
+  title: {
+    template: "Sussed | %s",
+    default: "Sussed",
+  },
   description:
-    "Manage and administer SUS (System Usability Scale) surveys for your projects with ease. Keep track of responses and analyze results with automatic score calculation.",
+    "Suss out your app's usability! Sussed is an online tool for measuring system usability. Manage and administer SUS (System Usability Scale) surveys for your projects with ease. Keep track of responses and analyze results with automatic score calculation.",
 };
 
 export default function RootLayout({

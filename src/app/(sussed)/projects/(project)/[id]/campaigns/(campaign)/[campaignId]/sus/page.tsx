@@ -7,13 +7,37 @@ async function getCampaign(id: string) {
       id,
     },
     include: {
-      project: true,
+      project: {
+        include: {
+          user: true,
+        },
+      },
       susResponses: true,
       susInvitations: true,
     },
   });
 
   return campaign;
+}
+
+// eslint-disable-next-line react-refresh/only-export-components
+export async function generateMetadata({
+  params: { campaignId },
+}: {
+  params: { campaignId: string };
+}) {
+  const campaign = await getCampaign(campaignId);
+
+  return {
+    title: {
+      default: "SUS Survey",
+    },
+    description: `${
+      campaign?.project.user.name || "Unknown user"
+    } invites you to fill out a survey for user testing of "${
+      campaign?.project.title || "Unknown project"
+    }"`,
+  };
 }
 
 export default async function SusQuestionnaire({

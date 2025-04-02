@@ -47,3 +47,4 @@ jobs:
           DATABASE_URL: postgres://postgres_user:postgres_password@localhost:5432/postgres_db
           AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
           NEXT_ENV: test
+          NEXT_PUBLIC_URL: http://localhost:3000
