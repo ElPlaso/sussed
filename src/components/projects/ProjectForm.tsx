@@ -31,11 +31,7 @@ export default function ProjectForm(props: ProjectFormProps) {
   const [state, formAction] = useFormState(onAction, initialState);
 
   const errorMessages = useMemo(() => {
-    return (
-      state?.errors?.filter((error) => {
-        return !error.includes("url");
-      }) || []
-    );
+    return state?.errors || [];
   }, [state]);
 
   const [isSetPublic, setSetPublic] = useState(project?.isPublic || false);
