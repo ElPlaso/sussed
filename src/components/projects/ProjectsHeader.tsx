@@ -18,7 +18,7 @@ export default function ProjectsHeader() {
       <Button
         className="bg-primary-500 dark:bg-primary-400 text-white"
         startContent={<FontAwesomeIcon icon={faAdd} />}
-        onClick={handleNewProject}
+        onPress={handleNewProject}
       >
         New Project
       </Button>

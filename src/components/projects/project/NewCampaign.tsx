@@ -37,7 +37,7 @@ export default function NewCampaign(props: NewCampaignProps) {
       <Button
         className="bg-primary-500 dark:bg-primary-400 text-white"
         startContent={<FontAwesomeIcon icon={faAdd} />}
-        onClick={toggleModal}
+        onPress={toggleModal}
       >
         Add Campaign
       </Button>
