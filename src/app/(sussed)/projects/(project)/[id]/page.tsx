@@ -19,22 +19,6 @@ async function getProject(id: string) {
   return project;
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
-export async function generateMetadata({
-  params: { id },
-}: {
-  params: { id: string };
-}) {
-  const project = await getProject(id);
-
-  return {
-    title: project?.title || "Unknown Project",
-    description: `View SUS Scores (System Usability Scale) for "${
-      project?.title || "Unknown Project"
-    }"`,
-  };
-}
-
 export default async function ProjectPage({
   params: { id },
 }: {
