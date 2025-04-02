@@ -1,4 +1,11 @@
 import SusSurvey from "@/components/sus/SusSurvey";
+import { Metadata } from "next";
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const metadata: Metadata = {
+  title: "Example",
+  description: "An example SUS survey",
+};
 
 export default function SusExample() {
   return (
