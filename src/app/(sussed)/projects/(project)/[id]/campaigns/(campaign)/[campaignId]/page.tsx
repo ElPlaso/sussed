@@ -35,6 +35,7 @@ export async function generateMetadata({
 
   return {
     title: {
+      template: `${campaign?.title || "Unknown Campaign"} | %s`,
       default: campaign?.title || "Unknown Campaign",
     },
   };
