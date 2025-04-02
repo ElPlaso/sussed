@@ -1,4 +1,6 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
 // Image metadata
 export const alt = "Sussed";
@@ -11,6 +13,10 @@ export const contentType = "image/png";
 
 // Image generation
 export default async function Image() {
+  const font = await readFile(
+    join(process.cwd(), "assets/Inter_24pt-SemiBold.ttf")
+  );
+
   return new ImageResponse(
     (
       <div
@@ -39,9 +45,6 @@ export default async function Image() {
         <div
           style={{
             color: "white",
-            fontSize: "8rem",
-            fontFamily: "sans-serif",
-            fontWeight: 800,
           }}
         >
           Sussed.
@@ -50,6 +53,14 @@ export default async function Image() {
     ),
     {
       ...size,
+      fonts: [
+        {
+          name: "Inter",
+          data: font,
+          style: "normal",
+          weight: 400,
+        },
+      ],
     }
   );
 }
