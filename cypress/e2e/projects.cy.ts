@@ -75,7 +75,7 @@ describe("Failures", () => {
     cy.login();
   });
 
-  it("Should try create a new project with an invalid link", () => {
+  it("Should try to create a new project with an invalid link", () => {
     cy.visit("/");
     cy.get("button").contains("New Project").click();
     cy.url().should("include", "/projects/new");
@@ -84,6 +84,16 @@ describe("Failures", () => {
     cy.get('input[name="link"]').type("localhost:3000");
     cy.get("button").contains("Add Project").click();
     cy.url().should("include", "/projects/new");
+    cy.contains("Invalid url");
+  });
+
+  it("Should try to add an invalid link to an existing project", () => {
+    cy.resetDatabase();
+    cy.visit("/projects/project1");
+    cy.get('svg[data-icon="ellipsis-vertical"]').parent().click();
+    cy.get('li[role="menuitem"]').contains("Edit").click();
+    cy.get('input[name="link"]').type("localhost:3000");
+    cy.get("button").contains("Save").click();
     cy.contains("Invalid url");
   });
 });
