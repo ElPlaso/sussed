@@ -59,7 +59,7 @@ export default async function WelcomePage() {
           <CardHeader className="justify-center bg-neutral-500 bg-opacity-10">
             <Image
               className="shadow-lg"
-              src="/sussed-new-project.PNG"
+              src="/images/sussed-new-project.PNG"
               width={650}
               height={650}
               alt={"New Project"}
@@ -73,7 +73,7 @@ export default async function WelcomePage() {
           <CardHeader className="justify-center bg-neutral-500 bg-opacity-10">
             <Image
               className="shadow-lg"
-              src="/sussed-new-campaign.PNG"
+              src="/images/sussed-new-campaign.PNG"
               width={650}
               height={650}
               alt={"New Campaign"}
@@ -86,7 +86,7 @@ export default async function WelcomePage() {
           <CardHeader className="justify-center bg-neutral-500 bg-opacity-10">
             <Image
               className="shadow-lg"
-              src="/sussed-new-invitation.PNG"
+              src="/images/sussed-new-invitation.PNG"
               width={650}
               height={650}
               alt={"New Invitation"}
@@ -115,7 +115,7 @@ export default async function WelcomePage() {
         <Card>
           <CardHeader className="justify-center">
             <Image
-              src="/sussed-sus-score.PNG"
+              src="/images/sussed-sus-score.PNG"
               width={500}
               height={500}
               alt={"Sus Score"}
