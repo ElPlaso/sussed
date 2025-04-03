@@ -153,7 +153,7 @@ export default async function WelcomePage() {
 
             <li className="flex gap-x-2 items-center">
               <SusScoreCircle score={OK_THRESHOLD - 1} size="lg" /> A score
-              below {OK_THRESHOLD} or above is generally not okay
+              below {OK_THRESHOLD} generally not okay
             </li>
           </ul>
         </div>
