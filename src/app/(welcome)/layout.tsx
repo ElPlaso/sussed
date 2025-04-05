@@ -36,7 +36,7 @@ export default function WelcomeWrapper({
         </NavbarContent>
       </Navbar>
       {children}
-      <footer className="w-full flex flex-col gap-y-6 bottom-0 mt-12 pb-6 px-16 max-sm:px-8">
+      <footer className="w-full flex flex-col gap-y-6 mt-12 pb-6 px-16 max-sm:px-8">
         <Divider />
         <div className="flex gap-x-4 justify-between items-center">
           <div>© {new Date().getFullYear()} Sussed</div>
