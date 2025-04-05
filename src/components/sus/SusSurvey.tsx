@@ -60,7 +60,7 @@ export default function SusSurvey(props: SusSurveyProps) {
     <form className="flex flex-col gap-y-8" action={formAction}>
       <div className="flex flex-col gap-y-2">
         <h2 className="text-lg">System Usability Scale Questionnaire (SUS)</h2>
-        <div className="text-sm text-neutral-500">{`Strongly Agree -> Strongly Disagree`}</div>
+        <div className="text-sm text-neutral-500">{`Strongly Disagree -> Strongly Agree`}</div>
       </div>
       {errorMessages.length > 0 && (
         <div className="flex flex-col gap-y-2">
@@ -86,7 +86,7 @@ export default function SusSurvey(props: SusSurveyProps) {
               >
                 {Object.entries(radioValues).map(([key, value]) => (
                   <Radio
-                    className="first:-ml-2 mx-4 last:-mr-2"
+                    className="lg:first:-ml-2 mx-4 lg:last:-mr-2"
                     key={key}
                     value={value}
                   >

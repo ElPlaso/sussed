@@ -17,10 +17,10 @@ import Image from "next/image";
 
 export default async function WelcomePage() {
   return (
-    <main className="flex flex-col px-16 pt-12 items-center">
+    <main className="flex flex-col px-16 pt-12 items-center max-sm:px-8">
       <div className="w-2/3 max-lg:w-full flex flex-col gap-y-8">
-        <div className="flex flex-col gap-y-4 px-8">
-          <h1 className="text-5xl font-sans font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+        <div className="flex flex-col gap-y-4 px-8 max-sm:px-0">
+          <h1 className="text-5xl font-sans font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent max-sm:text-4xl">
             Welcome to Sussed.
           </h1>
           <p className="text-lg max-w-[36rem]">
