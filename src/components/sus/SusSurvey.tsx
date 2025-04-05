@@ -86,7 +86,7 @@ export default function SusSurvey(props: SusSurveyProps) {
               >
                 {Object.entries(radioValues).map(([key, value]) => (
                   <Radio
-                    className="first:-ml-2 mx-4 last:-mr-2"
+                    className="lg:first:-ml-2 mx-4 lg:last:-mr-2"
                     key={key}
                     value={value}
                   >
