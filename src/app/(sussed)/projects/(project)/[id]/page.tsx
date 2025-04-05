@@ -48,7 +48,7 @@ export default async function ProjectPage({
 
   return (
     <main className="flex w-full justify-center">
-      <div className="flex flex-col px-12 py-8 gap-y-8 max-w-[96rem] w-full">
+      <div className="flex flex-col px-12 py-8 gap-y-8 max-w-[96rem] w-full max-sm:px-8">
         <div className="flex gap-x-4 justify-between items-start w-full">
           <div className="flex flex-col gap-y-2">
             <div className="flex gap-x-2 items-center">

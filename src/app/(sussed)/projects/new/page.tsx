@@ -24,7 +24,7 @@ export default function NewProjectPage() {
   };
 
   return (
-    <main className="flex flex-col px-12 py-10 items-center">
+    <main className="flex flex-col px-12 py-10 items-center max-sm:px-8">
       <div className="flex flex-col gap-y-8 w-2/3 max-lg:w-full">
         <h2 className="text-lg text-start">New Project</h2>
         <ProjectForm onAction={handleAction} onCancel={handleCancel} />
