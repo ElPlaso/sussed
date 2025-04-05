@@ -12,8 +12,8 @@ const PROVIDER_ID = "github";
 
 export default function Login() {
   return (
-    <main className="flex justify-center items-center h-screen">
-      <Card className="w-96 py-8">
+    <main className="flex justify-center items-center h-screen px-8">
+      <Card className="w-96 py-8 max-sm:w-full">
         <CardHeader className="flex flex-col gap-y-2 items-center">
           <Image
             src="/favicon.ico"
