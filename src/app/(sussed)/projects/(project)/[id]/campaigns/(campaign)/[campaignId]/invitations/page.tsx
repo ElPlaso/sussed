@@ -57,7 +57,7 @@ export default async function InvitationsPage({
 
   return (
     <main className="flex w-full justify-center">
-      <div className="flex flex-col px-12 py-8 gap-y-4 max-w-[96rem] w-full">
+      <div className="flex flex-col px-12 py-8 gap-y-4 max-w-[96rem] w-full max-sm:px-8">
         <CampaignInvitationsBreadcrumbs campaign={campaign} />
         <div className="flex gap-x-4 justify-between items-center w-full">
           <h1 className="text-xl">Invitations</h1>

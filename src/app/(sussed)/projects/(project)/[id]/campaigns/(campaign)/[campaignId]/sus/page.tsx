@@ -52,7 +52,7 @@ export default async function SusQuestionnaire({
   }
 
   return (
-    <main className="flex flex-col px-12 items-center py-8">
+    <main className="flex flex-col px-12 items-center py-8 max-sm:px-8">
       <div className="flex flex-col gap-y-4 items-start min-w-96">
         <h1 className="text-2xl">{campaign.project.title}</h1>
         <SusWrapper campaign={campaign} />
